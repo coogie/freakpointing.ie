@@ -1,29 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-IE">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Freak Pointing — Dublin Rock</title>
-  <meta name="description" content="Freak Pointing are a four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy. Book us: lads@freakpointing.ie">
+  <meta name="description" content="Freak Pointing are a four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.">
+  <link rel="canonical" href="https://freakpointing.ie">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta property="og:title" content="Freak Pointing">
   <meta property="og:description" content="Four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.">
-  <meta property="og:image" content="assets/spotify_banner.jpg">
+  <meta property="og:image" content="https://freakpointing.ie/assets/spotify_banner.jpg">
+  <meta property="og:image:width" content="2660">
+  <meta property="og:image:height" content="1140">
+  <meta property="og:url" content="https://freakpointing.ie">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_IE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Freak Pointing — Dublin Rock">
+  <meta name="twitter:description" content="Four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.">
+  <meta name="twitter:image" content="https://freakpointing.ie/assets/spotify_banner.jpg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#000000">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MusicGroup",
+        "@id": "https://freakpointing.ie/#band",
+        "name": "Freak Pointing",
+        "description": "A Dublin-based, four-piece rock band. Hard riffs, melodic anthems, punk energy.",
+        "url": "https://freakpointing.ie",
+        "image": "https://freakpointing.ie/assets/spotify_banner.jpg",
+        "genre": ["Rock", "Hard Rock", "Grunge"],
+        "foundingDate": "2020",
+        "foundingLocation": { "@type": "Place", "name": "Dublin, Ireland" },
+        "member": [
+          { "@type": "OrganizationRole", "roleName": "Vocalist", "member": { "@type": "Person", "name": "Fearghal Traynor" } },
+          { "@type": "OrganizationRole", "roleName": "Guitarist", "member": { "@type": "Person", "name": "Darryn Downey" } },
+          { "@type": "OrganizationRole", "roleName": "Bassist", "member": { "@type": "Person", "name": "Daragh Cosgrove" } },
+          { "@type": "OrganizationRole", "roleName": "Drummer", "member": { "@type": "Person", "name": "Stephen Coogan" } }
+        ],
+        "sameAs": [
+          "https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d",
+          "https://freakpointing.bandcamp.com/",
+          "https://music.apple.com/ie/artist/freak-pointing/1798274194",
+          "https://www.instagram.com/freakpointingband/"
+        ]
+      },
+      {
+        "@type": "MusicAlbum",
+        "name": "Too Tall To See The Moon",
+        "byArtist": { "@id": "https://freakpointing.ie/#band" },
+        "albumReleaseType": "EPRelease",
+        "datePublished": "2026-05-22",
+        "numTracks": 4,
+        "image": "https://freakpointing.ie/assets/Too_Tall_To_See_The_Moon_EP_Artwork.jpg"
+      },
+      {
+        "@type": "MusicEvent",
+        "name": "Freak Pointing at The International Bar",
+        "startDate": "2026-05-24",
+        "performer": { "@id": "https://freakpointing.ie/#band" },
+        "location": {
+          "@type": "MusicVenue",
+          "name": "The International Bar",
+          "address": { "@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE" }
+        },
+        "url": "https://www.eventbrite.com/e/stitch-jones-freak-pointing-spargo-sons-tickets-1982184988660",
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.eventbrite.com/e/stitch-jones-freak-pointing-spargo-sons-tickets-1982184988660",
+          "availability": "https://schema.org/InStock"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
+  <a href="#music" class="skip-link">Skip to main content</a>
+
   <!-- NAV -->
   <nav id="nav">
-    <a href="#" class="nav-logo">FP</a>
+    <a href="#hero" class="nav-logo">FP</a>
     <ul>
       <li><a href="#music">Music</a></li>
       <li><a href="#about">About</a></li>
-      <li><a href="#photos">Photos</a></li>
       <li><a href="#press">Press</a></li>
+      <li><a href="#video">Live</a></li>
+      <li><a href="#photos">Photos</a></li>
       <li><a href="#gigs">Gigs</a></li>
       <li><a href="#contact" class="nav-cta">Book Us</a></li>
     </ul>
@@ -33,21 +106,17 @@
   <section id="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
+      <h1 class="sr-only">Freak Pointing</h1>
       <img src="assets/FreakPointing_Logo.png" alt="Freak Pointing" class="hero-logo">
       <p class="hero-tagline">Dublin rock. Hard riffs. No filler.</p>
       <div class="hero-links">
-        <a href="https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d" target="_blank" rel="noopener" class="btn btn-primary">
+        <a href="https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
           <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
           Spotify
         </a>
-        <a href="https://freakpointing.bandcamp.com" target="_blank" rel="noopener" class="btn btn-outline">
-          <!-- TODO: confirm Bandcamp URL -->
-          Bandcamp
-        </a>
-        <a href="https://music.apple.com/search?term=freak+pointing" target="_blank" rel="noopener" class="btn btn-outline">
-          <!-- TODO: replace with direct Apple Music artist URL -->
-          Apple Music
-        </a>
+        <a href="https://freakpointing.bandcamp.com/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Bandcamp</a>
+        <a href="https://music.apple.com/ie/artist/freak-pointing/1798274194" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Apple Music</a>
+        <a href="https://music.youtube.com/channel/UCItu_dHVTs4DnHFZGTwq-gw" target="_blank" rel="noopener noreferrer" class="btn btn-outline">YouTube Music</a>
       </div>
     </div>
     <div class="hero-scroll-hint">
@@ -77,8 +146,33 @@
             <li>Unwound</li>
           </ol>
           <div class="release-embed">
-            <!-- TODO: replace with EP Spotify embed URI once released -->
-            <p class="embed-placeholder">Spotify player coming May 22nd</p>
+            <div id="ep-countdown" class="ep-countdown">
+              <p class="ep-countdown-label">Out in</p>
+              <div class="countdown-units">
+                <div class="countdown-unit">
+                  <span class="countdown-num" id="cd-days">00</span>
+                  <span class="countdown-label">Days</span>
+                </div>
+                <span class="countdown-sep" aria-hidden="true">:</span>
+                <div class="countdown-unit">
+                  <span class="countdown-num" id="cd-hours">00</span>
+                  <span class="countdown-label">Hours</span>
+                </div>
+                <span class="countdown-sep" aria-hidden="true">:</span>
+                <div class="countdown-unit">
+                  <span class="countdown-num" id="cd-mins">00</span>
+                  <span class="countdown-label">Mins</span>
+                </div>
+                <span class="countdown-sep" aria-hidden="true">:</span>
+                <div class="countdown-unit">
+                  <span class="countdown-num" id="cd-secs">00</span>
+                  <span class="countdown-label">Secs</span>
+                </div>
+              </div>
+            </div>
+            <div id="ep-embed" class="ep-embed-reveal" style="display:none">
+              <iframe title="Too Tall To See The Moon — Freak Pointing on Spotify" style="border-radius:0" src="https://open.spotify.com/embed/album/17aMmqGbvERLEdyMJyXG19?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -88,13 +182,41 @@
       <div class="singles-grid">
 
         <div class="single-card">
+          <div class="single-art-wrap">
+            <img src="assets/Too_Tall_To_See_The_Moon_EP_Artwork.jpg" alt="The Circle Beneath single artwork">
+            <span class="single-badge">Single</span>
+          </div>
+          <div class="single-info">
+            <h4>The Circle Beneath</h4>
+            <p class="single-year">2026</p>
+          </div>
+          <div class="single-embed">
+            <div id="cb-countdown" class="ep-countdown">
+              <p class="ep-countdown-label">Out in</p>
+              <div class="countdown-units">
+                <div class="countdown-unit"><span class="countdown-num" id="cb-days">00</span><span class="countdown-label">Days</span></div>
+                <span class="countdown-sep" aria-hidden="true">:</span>
+                <div class="countdown-unit"><span class="countdown-num" id="cb-hours">00</span><span class="countdown-label">Hours</span></div>
+                <span class="countdown-sep" aria-hidden="true">:</span>
+                <div class="countdown-unit"><span class="countdown-num" id="cb-mins">00</span><span class="countdown-label">Mins</span></div>
+                <span class="countdown-sep" aria-hidden="true">:</span>
+                <div class="countdown-unit"><span class="countdown-num" id="cb-secs">00</span><span class="countdown-label">Secs</span></div>
+              </div>
+            </div>
+            <div id="cb-embed" class="ep-embed-reveal" style="display:none">
+              <iframe title="The Circle Beneath — Freak Pointing on Spotify" style="border-radius:0" src="https://open.spotify.com/embed/album/0LGCXRF0S1Whfna4skKHYH?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="single-card">
           <img src="assets/Stuck_Single_Artwork.jpg" alt="Stuck single artwork">
           <div class="single-info">
             <h4>Stuck</h4>
             <p class="single-year">2025</p>
           </div>
           <div class="single-embed">
-            <iframe style="border-radius:0" src="https://open.spotify.com/embed/album/3FvpyEoo9xgmtFMPjqlk7y?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe title="Stuck — Freak Pointing on Spotify" style="border-radius:0" src="https://open.spotify.com/embed/album/3FvpyEoo9xgmtFMPjqlk7y?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
           </div>
         </div>
 
@@ -105,7 +227,7 @@
             <p class="single-year">2025</p>
           </div>
           <div class="single-embed">
-            <iframe style="border-radius:0" src="https://open.spotify.com/embed/album/0JosHP1RTykMNcM834eiWQ?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe title="Vainglorious — Freak Pointing on Spotify" style="border-radius:0" src="https://open.spotify.com/embed/album/0JosHP1RTykMNcM834eiWQ?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
           </div>
         </div>
 
@@ -118,8 +240,8 @@
     <div class="section-inner about-inner">
       <div class="about-text">
         <h2 class="section-label">About</h2>
-        <p class="about-bio">A Dublin-based, four-piece rock band formed in the summer of 2020. Bringing in influences from hard rock, grunge, metal, and folk, Freak Pointing combine these elements with memorable riffs and authentic lyrics to create melodic, musically-diverse anthems for the 21st century.</p>
-        <p class="about-bio">From pub stages to festival fields, they deliver raw energy and tight performances that stick with you long after the last chord fades.</p>
+        <p class="about-bio">Freak Pointing are a four-piece Dublin rock band whose debut EP <em>Too Tall To See The Moon</em> earned a 9/10 from Into d'Groove. Drawing on hard rock, grunge, metal, and folk, they write songs built on real riffs and lyrics that mean something.</p>
+        <p class="about-bio">From Dublin stages to wherever the next one takes them — raw energy and tight performances that stick with you long after the last chord fades.</p>
         <ul class="members">
           <li><span class="member-name">Fearghal Traynor</span><span class="member-role">Vocals</span></li>
           <li><span class="member-name">Darryn Downey</span><span class="member-role">Lead &amp; Rhythm Guitars</span></li>
@@ -130,33 +252,44 @@
     </div>
   </section>
 
+  <!-- PRESS -->
+  <section id="press">
+    <div class="section-inner press-inner">
+      <h2 class="section-label">Press</h2>
+      <blockquote class="press-quote">
+        <p class="quote-mark">"</p>
+        <p class="quote-text">Halfway through the first track I was already hooked. Fresh, loud, crisp in its delivery — these guys have delivered not only a listenable release, but a highly enjoyable one.</p>
+        <footer class="quote-attribution">
+          <span class="quote-author">Dorn Simon</span>
+          <span class="quote-source">Into d'Groove</span>
+          <span class="quote-score">9/10</span>
+        </footer>
+      </blockquote>
+      <button class="btn btn-outline press-pdf-link" onclick="openReviewLightbox()">
+        Read full review
+      </button>
+    </div>
+  </section>
+
   <!-- VIDEO -->
   <section id="video">
     <div class="section-inner">
       <h2 class="section-label">Live</h2>
       <div class="video-grid">
 
-        <!-- TODO: Replace src with actual YouTube/Vimeo embed URL -->
-        <!-- Example: src="https://www.youtube.com/embed/VIDEO_ID" -->
-        <div class="video-slot">
-          <div class="video-placeholder">
-            <span class="video-placeholder-icon">▶</span>
-            <span class="video-placeholder-text">Video coming soon</span>
+        <button type="button" class="video-slot video-slot--instagram" onclick="openVideoLightbox()" aria-label="Play Thumb Tacks live video">
+          <img src="assets/videos/thumbtacks.png" alt="Thumb Tacks live" class="video-thumb">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </div>
-          <!-- TODO: Uncomment and fill in when video is available:
-          <iframe src="https://www.youtube.com/embed/TODO" title="Freak Pointing live" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          -->
-        </div>
+          <div class="video-ig-badge">
+            <svg class="ig-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            <span>Instagram</span>
+          </div>
+        </button>
 
-        <!-- TODO: Replace src with actual YouTube/Vimeo embed URL -->
         <div class="video-slot">
-          <div class="video-placeholder">
-            <span class="video-placeholder-icon">▶</span>
-            <span class="video-placeholder-text">Video coming soon</span>
-          </div>
-          <!-- TODO: Uncomment and fill in when video is available:
-          <iframe src="https://www.youtube.com/embed/TODO" title="Freak Pointing live" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          -->
+          <iframe src="https://www.youtube.com/embed/JQkVXvB9BBo" title="Freak Pointing live" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
 
       </div>
@@ -174,25 +307,6 @@
     </div>
   </section>
 
-  <!-- PRESS -->
-  <section id="press">
-    <div class="section-inner press-inner">
-      <h2 class="section-label">Press</h2>
-      <blockquote class="press-quote">
-        <p class="quote-mark">"</p>
-        <p class="quote-text">Fresh, loud, crisp in its delivery. They have cleverly woven nuances of every punk era into their songs. These guys have delivered not only a listenable release, but a highly enjoyable one.</p>
-        <footer class="quote-attribution">
-          <span class="quote-author">Dorn Simon</span>
-          <span class="quote-source">Into d'Groove</span>
-          <span class="quote-score">9/10 &nbsp;★★★★★</span>
-        </footer>
-      </blockquote>
-      <a href="assets/Freak Pointing Album review.pdf" target="_blank" rel="noopener" class="btn btn-outline press-pdf-link">
-        Read full review (PDF)
-      </a>
-    </div>
-  </section>
-
   <!-- GIGS -->
   <section id="gigs">
     <div class="section-inner">
@@ -204,6 +318,7 @@
           <span class="gig-venue">The International Bar</span>
           <span class="gig-location">Dublin</span>
           <span class="gig-support">w/ Stitch Jones</span>
+          <a href="https://www.eventbrite.com/e/stitch-jones-freak-pointing-spargo-sons-tickets-1982184988660" target="_blank" rel="noopener noreferrer" class="gig-tickets">Tickets</a>
         </div>
 
         <!-- Add future gigs here in the same format:
@@ -215,6 +330,40 @@
         </div>
         -->
 
+        <div class="gigs-past-label">Recent shows</div>
+
+        <div class="gig-row gig-row--past">
+          <span class="gig-date">Fri 20 Mar 2026</span>
+          <span class="gig-venue">Sin É</span>
+          <span class="gig-location">Dublin</span>
+          <span class="gig-support">w/ Grey City Riot / Modern Grief</span>
+          <span class="gig-tickets-placeholder"></span>
+        </div>
+
+        <div class="gig-row gig-row--past">
+          <span class="gig-date">Fri 28 Nov 2025</span>
+          <span class="gig-venue">The International Bar</span>
+          <span class="gig-location">Dublin</span>
+          <span class="gig-support">w/ Bad Mothers Union / Grey City Riot</span>
+          <span class="gig-tickets-placeholder"></span>
+        </div>
+
+        <div class="gig-row gig-row--past">
+          <span class="gig-date">Sat 09 Aug 2025</span>
+          <span class="gig-venue">McDowell's Pub</span>
+          <span class="gig-location">Dublin</span>
+          <span class="gig-support">w/ Grey City Riot / Sleepy Days / Afterthought / Thumbsucker</span>
+          <span class="gig-tickets-placeholder"></span>
+        </div>
+
+        <div class="gig-row gig-row--past">
+          <span class="gig-date">Wed 20 Nov 2024</span>
+          <span class="gig-venue">The Sound House</span>
+          <span class="gig-location">Dublin</span>
+          <span class="gig-support"></span>
+          <span class="gig-tickets-placeholder"></span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -224,25 +373,20 @@
     <div class="section-inner contact-inner">
       <h2 class="section-label">Contact</h2>
       <p class="contact-heading">Book us / Get in touch</p>
-      <a href="mailto:lads@freakpointing.ie" class="contact-email">lads@freakpointing.ie</a>
+      <a id="contact-email" href="#" class="contact-email"></a>
 
       <div class="contact-links">
         <h3 class="contact-links-label">Listen</h3>
         <div class="link-row">
-          <a href="https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d" target="_blank" rel="noopener" class="contact-link">Spotify</a>
-          <a href="https://freakpointing.bandcamp.com" target="_blank" rel="noopener" class="contact-link">
-            <!-- TODO: confirm Bandcamp URL -->
-            Bandcamp
-          </a>
-          <a href="https://music.apple.com/search?term=freak+pointing" target="_blank" rel="noopener" class="contact-link">
-            <!-- TODO: replace with direct Apple Music artist URL -->
-            Apple Music
-          </a>
+          <a href="https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d" target="_blank" rel="noopener noreferrer" class="contact-link">Spotify</a>
+          <a href="https://freakpointing.bandcamp.com/" target="_blank" rel="noopener noreferrer" class="contact-link">Bandcamp</a>
+          <a href="https://music.apple.com/ie/artist/freak-pointing/1798274194" target="_blank" rel="noopener noreferrer" class="contact-link">Apple Music</a>
+          <a href="https://music.youtube.com/channel/UCItu_dHVTs4DnHFZGTwq-gw" target="_blank" rel="noopener noreferrer" class="contact-link">YouTube Music</a>
         </div>
 
         <h3 class="contact-links-label">Follow</h3>
         <div class="link-row">
-          <a href="https://instagram.com/freakpointingband" target="_blank" rel="noopener" class="contact-link">Instagram</a>
+          <a href="https://instagram.com/freakpointingband" target="_blank" rel="noopener noreferrer" class="contact-link">Instagram</a>
         </div>
       </div>
     </div>
@@ -257,6 +401,103 @@
       <img id="lightbox-img" src="" alt="">
     </div>
     <div class="lightbox-counter" id="lightbox-counter"></div>
+  </div>
+
+  <!-- REVIEW LIGHTBOX -->
+  <div id="review-lightbox" class="review-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="review-lightbox-inner">
+      <button class="lightbox-close review-lightbox-close" onclick="closeReviewLightbox()" aria-label="Close">&times;</button>
+
+      <header class="review-header">
+        <div class="review-publication">
+          <span class="review-pub-name">Into d'Groove</span>
+          <span class="review-pub-sep">—</span>
+          <span class="review-pub-type">EP Review</span>
+        </div>
+        <div class="review-score">
+          <span class="review-score-num">9</span><span class="review-score-denom">/10</span>
+        </div>
+      </header>
+
+      <div class="review-body">
+        <h2 class="review-title">Too Tall To See The Moon</h2>
+        <p class="review-band">Freak Pointing</p>
+
+        <p class="review-intro">Having never yet heard of the band, I wasn't sure what I was about to expose my ears to, but all I can say is that halfway through the first track I was already hooked, by midway of Third, that was it, I am a fan!</p>
+
+        <div class="review-track">
+          <h3 class="review-track-name">The Circle Beneath</h3>
+          <p>Opens with some heavy baselines bringing back some 80's Goth vibes, but no, wait, hang on, what's that pick scrape creating a contrasting punk element, switching out for '76 guitar, followed by vox in true punk style, noise increases rhythmic, anarchic, melodic, a track to get you bouncing &amp; singing along, with a nice guitar solo midway, a sound that this Gen X journalist was very happy to hear, equally catering to 14yo modern day punksters.</p>
+        </div>
+
+        <div class="review-track">
+          <h3 class="review-track-name">Third</h3>
+          <p>Instantly brought my mind to another track with my exclaiming in delight "Oooo" — Rezillos/Revillos meets Freak Pointing! This EP is hitting every chord of memories galore, cranking it out in their own way, its fresh, its loud, its crisp in its delivery. I cannot wait to see these guys live!</p>
+          <p>Whoa, the way the build ups switch sounds yet keep with the themes is quite something, Eton Rifles blast from the past flew off the bass &amp; guitar in a new song all of its own. Now…how the heck are these guys doing this? Violent Femmes enter the mix, not to negate the sheer musical prowess of this band, they have cleverly woven nuances of every punk era into their songs! Lyrics resonating with the populace!</p>
+        </div>
+
+        <div class="review-track">
+          <h3 class="review-track-name">Thumb Tacks</h3>
+          <p>Drums lead the way marching us into baselines that are all so delectable, next that 60s guitar riff, followed with that voice that speaks so loud &amp; raw, gritty, authentic. This track brings a rockier element to it, maturing out of classic punk into something deeper &amp; more hypnotic with that guitar solo.</p>
+        </div>
+
+        <div class="review-track">
+          <h3 class="review-track-name">Unwound</h3>
+          <p>Grunge opener crashes in, slowing to bass/drum combo before vocals layer the track into a sound blast. The lyrics hit serious subject matter in its melodic formation.</p>
+        </div>
+
+        <blockquote class="review-verdict">
+          "Well what a delight this EP is, highly recommended. These guys have delivered not only a listenable release, but a highly enjoyable one."
+        </blockquote>
+
+        <footer class="review-attribution">
+          <span class="review-author">Dorn Simon</span>
+          <span class="review-source">Into d'Groove</span>
+          <a href="https://www.instagram.com/intodgroove/" target="_blank" rel="noopener noreferrer" class="review-ig-link">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            @intodgroove
+          </a>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO LIGHTBOX -->
+  <div id="video-lightbox" class="video-lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <button class="lightbox-close" onclick="closeVideoLightbox()" aria-label="Close">&times;</button>
+    <div class="video-lightbox-inner">
+      <div class="video-lightbox-player">
+        <video id="ig-video" src="assets/videos/thumbtacks.mp4" controls playsinline></video>
+      </div>
+      <div class="video-lightbox-meta">
+        <div class="ig-meta-header">
+          <svg class="ig-meta-icon" viewBox="0 0 24 24" fill="url(#ig-grad)">
+            <defs>
+              <linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#f09433"/>
+                <stop offset="25%" stop-color="#e6683c"/>
+                <stop offset="50%" stop-color="#dc2743"/>
+                <stop offset="75%" stop-color="#cc2366"/>
+                <stop offset="100%" stop-color="#bc1888"/>
+              </linearGradient>
+            </defs>
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+          <div>
+            <p class="ig-meta-handle">@freakpointingband</p>
+            <p class="ig-meta-platform">Instagram</p>
+          </div>
+        </div>
+        <div class="ig-meta-body">
+          <p class="ig-meta-title">Thumb Tacks</p>
+          <p class="ig-meta-desc">Live performance</p>
+        </div>
+        <a href="https://www.instagram.com/freakpointingband/p/DWQ4JmijZU2/?img_index=9" target="_blank" rel="noopener noreferrer" class="ig-meta-link">
+          View on Instagram
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>

@@ -3,138 +3,301 @@
    Nav scroll behaviour + photo grid + lightbox
    ============================================================ */
 
-/* --- Nav: add .scrolled class on scroll ------------------- */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 60);
-}, { passive: true });
+(function () {
+  'use strict';
 
-/* --- Photo grid ------------------------------------------- */
-// Photos are listed here. Add/remove filenames as needed.
-// All photos must be in assets/photos/
-const PHOTOS = [
-  // Album 1 — gig photos
-  'IMG_1952.jpg',
-  'IMG_1978.jpg',
-  'IMG_1999.jpg',
-  'IMG_2049.jpg',
-  'IMG_2096.jpg',
-  'IMG_2233.jpg',
-  'IMG_2248.jpg',
-  'IMG_2246.jpg',
-  'IMG_2263.jpg',
-  // Album 2 — gig photos (populated after download)
-  // TODO: add Album 2 filenames here once downloaded
-  // Album 3 — gig photos
-  'IMG_0761.jpg',
-  'IMG_0764.jpg',
-  'IMG_0770.jpg',
-  'IMG_0812.jpg',
-  'IMG_0839.jpg',
-  'IMG_0860.jpg',
-  'IMG_0889.jpg',
-  'IMG_0894.jpg',
-  'IMG_0906.jpg',
-  'IMG_0964.jpg',
-];
+  /* --- Release countdowns ----------------------------------- */
+  // Starts a countdown that swaps to an embed when the release date passes.
+  function startCountdown(releaseDate, prefix, countdownEl, embedEl) {
+    if (!countdownEl || !embedEl) return;
+    const pad = n => String(n).padStart(2, '0');
 
-const grid = document.getElementById('photo-grid');
-let loadedPhotos = [];
+    function tick() {
+      const diff = releaseDate - Date.now();
+      if (diff <= 0) {
+        clearInterval(timer);
+        countdownEl.style.display = 'none';
+        embedEl.style.display = 'block';
+        return;
+      }
+      const set = (id, val) => {
+        const el = document.getElementById(id);
+        if (el && el.textContent !== val) el.textContent = val;
+      };
+      set(`${prefix}-days`,  pad(Math.floor(diff / 86400000)));
+      set(`${prefix}-hours`, pad(Math.floor((diff % 86400000) / 3600000)));
+      set(`${prefix}-mins`,  pad(Math.floor((diff % 3600000)  / 60000)));
+      set(`${prefix}-secs`,  pad(Math.floor((diff % 60000)    / 1000)));
+    }
 
-function buildPhotoGrid() {
-  loadedPhotos = [];
-
-  if (PHOTOS.length === 0) {
-    grid.innerHTML = '<p class="photos-empty">Photos coming soon.</p>';
-    return;
+    tick();
+    const timer = setInterval(tick, 1000);
   }
 
-  PHOTOS.forEach((filename, index) => {
-    const img = document.createElement('img');
-    img.src = `assets/photos/${filename}`;
-    img.alt = `Freak Pointing live — ${filename.replace(/\.[^.]+$/, '')}`;
-    img.loading = 'lazy';
-    img.dataset.index = index;
+  startCountdown(
+    new Date('2026-05-22T00:00:00+01:00'),
+    'cd',
+    document.getElementById('ep-countdown'),
+    document.getElementById('ep-embed')
+  );
 
-    img.addEventListener('click', () => openLightbox(index));
+  startCountdown(
+    new Date('2026-04-15T00:00:00+01:00'),
+    'cb',
+    document.getElementById('cb-countdown'),
+    document.getElementById('cb-embed')
+  );
 
-    // Only add to grid if it loads successfully
-    img.addEventListener('load', () => {
-      loadedPhotos.push({ src: img.src, alt: img.alt });
+  /* --- Contact email (scraper protection) ------------------- */
+  const emailEl = document.getElementById('contact-email');
+  if (emailEl) {
+    const u = 'lads', d = 'freakpointing.ie';
+    emailEl.href = 'mailto:' + u + '@' + d;
+    emailEl.textContent = u + '@' + d;
+  }
+
+  /* --- Nav: add .scrolled class on scroll ------------------- */
+  const nav = document.getElementById('nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+  }
+
+  /* --- Focus trap utility ----------------------------------- */
+  function getFocusable(el) {
+    return Array.from(el.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )).filter(n => !n.disabled);
+  }
+
+  function trapFocus(el, e) {
+    if (e.key !== 'Tab') return;
+    const focusable = getFocusable(el);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
+  /* --- Review lightbox -------------------------------------- */
+  const reviewLightbox = document.getElementById('review-lightbox');
+  let reviewLightboxTrigger = null;
+
+  function openReviewLightbox() {
+    if (!reviewLightbox) return;
+    reviewLightboxTrigger = document.activeElement;
+    reviewLightbox.classList.add('open');
+    reviewLightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const focusable = getFocusable(reviewLightbox);
+    if (focusable.length) focusable[0].focus();
+  }
+
+  function closeReviewLightbox() {
+    if (!reviewLightbox) return;
+    reviewLightbox.classList.remove('open');
+    reviewLightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (reviewLightboxTrigger) reviewLightboxTrigger.focus();
+  }
+
+  if (reviewLightbox) {
+    reviewLightbox.addEventListener('click', e => {
+      if (e.target === reviewLightbox) closeReviewLightbox();
     });
+  }
 
-    grid.appendChild(img);
+  /* Expose to inline onclick */
+  window.openReviewLightbox  = openReviewLightbox;
+  window.closeReviewLightbox = closeReviewLightbox;
+
+  /* --- Instagram video lightbox ----------------------------- */
+  const videoLightbox = document.getElementById('video-lightbox');
+  const igVideo       = document.getElementById('ig-video');
+  let videoLightboxTrigger = null;
+
+  function openVideoLightbox() {
+    if (!videoLightbox) return;
+    videoLightboxTrigger = document.activeElement;
+    videoLightbox.classList.add('open');
+    videoLightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (igVideo) {
+      const playPromise = igVideo.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => { /* autoplay blocked — user can press play manually */ });
+      }
+    }
+    const focusable = getFocusable(videoLightbox);
+    if (focusable.length) focusable[0].focus();
+  }
+
+  function closeVideoLightbox() {
+    if (!videoLightbox) return;
+    videoLightbox.classList.remove('open');
+    videoLightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (igVideo) {
+      igVideo.pause();
+      igVideo.currentTime = 0;
+    }
+    if (videoLightboxTrigger) videoLightboxTrigger.focus();
+  }
+
+  if (videoLightbox) {
+    videoLightbox.addEventListener('click', e => {
+      if (e.target === videoLightbox) closeVideoLightbox();
+    });
+  }
+
+  window.openVideoLightbox  = openVideoLightbox;
+  window.closeVideoLightbox = closeVideoLightbox;
+
+  /* --- Photo grid ------------------------------------------- */
+  // Photos are listed here. Add/remove filenames as needed.
+  // All photos must be in assets/photos/
+  const PHOTOS = [
+    'IMG_1272.jpg',
+    'IMG_0761.jpg',
+    'IMG_0764.jpg',
+    'IMG_0812.jpg',
+    'IMG_0889.jpg',
+    'IMG_1978.jpg',
+    'IMG_2049.jpg',
+    'IMG_2248.jpg',
+    'IMG_4732.jpg',
+    'IMG_4877.jpg',
+    'IMG_4977.jpg',
+    'IMG_1447.jpg',
+  ];
+
+  // Fisher-Yates shuffle (unbiased)
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  const grid = document.getElementById('photo-grid');
+
+  function buildPhotoGrid() {
+    if (!grid) return;
+    shuffle(PHOTOS);
+
+    if (PHOTOS.length === 0) {
+      grid.innerHTML = '<p class="photos-empty">Photos coming soon.</p>';
+      return;
+    }
+
+    PHOTOS.forEach((filename, index) => {
+      const img = document.createElement('img');
+      img.src = `assets/photos/${filename}`;
+      img.alt = 'Freak Pointing live';
+      img.loading = 'lazy';
+      img.dataset.index = index;
+      img.addEventListener('click', () => openLightbox(index));
+      img.addEventListener('error', () => { img.remove(); });
+      grid.appendChild(img);
+    });
+  }
+
+  buildPhotoGrid();
+
+  /* --- Photo lightbox --------------------------------------- */
+  const lightbox      = document.getElementById('lightbox');
+  const lightboxImg   = lightbox ? document.getElementById('lightbox-img') : null;
+  const lightboxClose = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+  const lightboxPrev  = lightbox ? lightbox.querySelector('.lightbox-prev') : null;
+  const lightboxNext  = lightbox ? lightbox.querySelector('.lightbox-next') : null;
+  const lightboxCount = document.getElementById('lightbox-counter');
+
+  let currentIndex = 0;
+  let lightboxTrigger = null;
+
+  function getGridImages() {
+    return grid ? Array.from(grid.querySelectorAll('img')) : [];
+  }
+
+  function openLightbox(index) {
+    if (!lightbox) return;
+    const allImgs = getGridImages();
+    if (allImgs.length === 0) return;
+    lightboxTrigger = document.activeElement;
+    currentIndex = index;
+    showImage(currentIndex);
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (lightboxClose) lightboxClose.focus();
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lightboxImg) lightboxImg.src = '';
+    if (lightboxTrigger) lightboxTrigger.focus();
+  }
+
+  function showImage(index) {
+    const allImgs = getGridImages();
+    const img = allImgs[index];
+    if (!img || !lightboxImg) return;
+    lightboxImg.src = img.src;
+    lightboxImg.alt = img.alt;
+    if (lightboxCount) lightboxCount.textContent = `${index + 1} / ${allImgs.length}`;
+  }
+
+  function prev() {
+    const allImgs = getGridImages();
+    currentIndex = (currentIndex - 1 + allImgs.length) % allImgs.length;
+    showImage(currentIndex);
+  }
+
+  function next() {
+    const allImgs = getGridImages();
+    currentIndex = (currentIndex + 1) % allImgs.length;
+    showImage(currentIndex);
+  }
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxPrev)  lightboxPrev.addEventListener('click', prev);
+  if (lightboxNext)  lightboxNext.addEventListener('click', next);
+
+  if (lightbox) {
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+
+  /* --- Consolidated keyboard handler ------------------------ */
+  document.addEventListener('keydown', e => {
+    if (lightbox && lightbox.classList.contains('open')) {
+      if (e.key === 'Escape')     { closeLightbox(); return; }
+      if (e.key === 'ArrowLeft')  { prev(); return; }
+      if (e.key === 'ArrowRight') { next(); return; }
+      trapFocus(lightbox, e);
+      return;
+    }
+    if (reviewLightbox && reviewLightbox.classList.contains('open')) {
+      if (e.key === 'Escape') { closeReviewLightbox(); return; }
+      trapFocus(reviewLightbox, e);
+      return;
+    }
+    if (videoLightbox && videoLightbox.classList.contains('open')) {
+      if (e.key === 'Escape') { closeVideoLightbox(); return; }
+      trapFocus(videoLightbox, e);
+    }
   });
-}
 
-buildPhotoGrid();
-
-/* --- Lightbox --------------------------------------------- */
-const lightbox      = document.getElementById('lightbox');
-const lightboxImg   = document.getElementById('lightbox-img');
-const lightboxClose = lightbox.querySelector('.lightbox-close');
-const lightboxPrev  = lightbox.querySelector('.lightbox-prev');
-const lightboxNext  = lightbox.querySelector('.lightbox-next');
-const lightboxCount = document.getElementById('lightbox-counter');
-
-let currentIndex = 0;
-let allImgs = [];
-
-function getGridImages() {
-  return Array.from(grid.querySelectorAll('img'));
-}
-
-function openLightbox(index) {
-  allImgs = getGridImages();
-  if (allImgs.length === 0) return;
-  currentIndex = index;
-  showImage(currentIndex);
-  lightbox.classList.add('open');
-  lightbox.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-  lightbox.classList.remove('open');
-  lightbox.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-  lightboxImg.src = '';
-}
-
-function showImage(index) {
-  allImgs = getGridImages();
-  const img = allImgs[index];
-  if (!img) return;
-  lightboxImg.src = img.src;
-  lightboxImg.alt = img.alt;
-  lightboxCount.textContent = `${index + 1} / ${allImgs.length}`;
-}
-
-function prev() {
-  allImgs = getGridImages();
-  currentIndex = (currentIndex - 1 + allImgs.length) % allImgs.length;
-  showImage(currentIndex);
-}
-
-function next() {
-  allImgs = getGridImages();
-  currentIndex = (currentIndex + 1) % allImgs.length;
-  showImage(currentIndex);
-}
-
-lightboxClose.addEventListener('click', closeLightbox);
-lightboxPrev.addEventListener('click', prev);
-lightboxNext.addEventListener('click', next);
-
-// Close on backdrop click
-lightbox.addEventListener('click', (e) => {
-  if (e.target === lightbox) closeLightbox();
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key === 'Escape')      closeLightbox();
-  if (e.key === 'ArrowLeft')   prev();
-  if (e.key === 'ArrowRight')  next();
-});
+})();
