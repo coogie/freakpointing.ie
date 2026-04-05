@@ -123,6 +123,19 @@
   const igVideo       = document.getElementById('ig-video');
   let videoLightboxTrigger = null;
 
+  // Preload the video on hover/focus so it's ready when the lightbox opens
+  const igTrigger = document.querySelector('.video-slot--instagram');
+  if (igTrigger && igVideo) {
+    function preloadIgVideo() {
+      if (igVideo.preload === 'none') {
+        igVideo.preload = 'auto';
+        igVideo.load();
+      }
+    }
+    igTrigger.addEventListener('mouseenter', preloadIgVideo, { once: true });
+    igTrigger.addEventListener('focus',      preloadIgVideo, { once: true });
+  }
+
   function openVideoLightbox() {
     if (!videoLightbox) return;
     videoLightboxTrigger = document.activeElement;

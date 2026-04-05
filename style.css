@@ -594,66 +594,7 @@ ol, ul { list-style: none; }
 
 /* --- GIGS ------------------------------------------------- */
 #gigs { background: var(--grey-dark); }
-.gigs-list { display: flex; flex-direction: column; }
-.gig-row {
-  display: grid;
-  grid-template-columns: 180px 1fr auto auto auto;
-  gap: 16px 32px;
-  align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--grey-mid);
-}
-.gig-row:first-child { border-top: 1px solid var(--grey-mid); }
-.gig-date {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  letter-spacing: 0.05em;
-  color: var(--accent);
-}
-.gig-venue {
-  font-size: 16px;
-  font-weight: 600;
-}
-.gig-location {
-  font-size: 13px;
-  color: var(--grey);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-.gig-support {
-  font-size: 13px;
-  color: var(--grey);
-  font-style: italic;
-}
-.gigs-past-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--grey-mid);
-  padding: 28px 0 8px;
-}
-.gig-row--past {
-  opacity: 0.45;
-  transition: opacity 0.15s;
-}
-.gig-row--past:hover { opacity: 0.7; }
-.gig-tickets-placeholder { display: block; }
-.gig-tickets {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #fff;
-  background: #F05537;
-  border-radius: 4px;
-  padding: 5px 12px;
-  text-decoration: none;
-  transition: background 0.15s;
-}
-.gig-tickets:hover {
-  background: #d4401f;
-}
+.bit-widget-container { width: 100%; }
 
 /* --- REVIEW LIGHTBOX -------------------------------------- */
 .review-lightbox {
@@ -1129,14 +1070,6 @@ button.video-slot {
 
   /* Photos */
   .masonry-grid { columns: 2; }
-
-  /* Gigs */
-  .gig-row {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-  }
-  .gig-date { grid-column: 1 / -1; }
-  .gig-tickets { grid-column: 1 / -1; justify-self: start; }
 
   /* Lightbox */
   .lightbox-prev { left: 8px; }
