@@ -184,7 +184,7 @@ ol, ul { list-style: none; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('assets/spotify_banner.jpg');
+  background-image: image-set(url('assets/spotify_banner.webp') type('image/webp'), url('assets/spotify_banner.jpg') type('image/jpeg'));
   background-size: cover;
   background-position: center;
   filter: brightness(0.45);

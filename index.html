@@ -24,6 +24,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <meta name="theme-color" content="#000000">
   <link rel="stylesheet" href="style.css">
+  <link rel="preload" as="image" href="assets/spotify_banner.webp" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -110,7 +111,7 @@
       <h1 class="sr-only">Freak Pointing</h1>
       <picture>
         <source type="image/webp" srcset="assets/FreakPointing_Logo-640.webp 640w, assets/FreakPointing_Logo-1280.webp 1280w" sizes="(max-width: 768px) 80vw, 577px">
-        <img src="assets/FreakPointing_Logo.png" alt="Freak Pointing" class="hero-logo" width="2507" height="1140">
+        <img src="assets/FreakPointing_Logo.png" alt="Freak Pointing" class="hero-logo" width="2507" height="1140" fetchpriority="high">
       </picture>
       <p class="hero-tagline">Dublin rock. Hard riffs. No filler.</p>
       <div class="hero-links">
@@ -298,7 +299,11 @@
       <div class="video-grid">
 
         <button type="button" class="video-slot video-slot--instagram" onclick="openVideoLightbox()" aria-label="Play Thumb Tacks live video">
-          <img src="assets/videos/thumbtacks.webp" alt="Thumb Tacks live" class="video-thumb">
+          <img src="assets/videos/thumbtacks-800.webp"
+               srcset="assets/videos/thumbtacks-800.webp 800w, assets/videos/thumbtacks.webp 1666w"
+               sizes="(max-width: 768px) 100vw, 800px"
+               alt="Thumb Tacks live" class="video-thumb"
+               width="800" height="450">
           <div class="video-play-btn">
             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           </div>
@@ -332,7 +337,6 @@
     <div class="section-inner">
       <h2 class="section-label">Gigs</h2>
       <div class="bit-widget-container">
-        <script charset="utf-8" src="https://widgetv3.bandsintown.com/main.min.js"></script>
         <a class="bit-widget-initializer"
           data-artist-name="id_15577576"
           data-app-id="d16aa0e6f35ae238889ba49150dba35a"

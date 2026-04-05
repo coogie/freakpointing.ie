@@ -293,6 +293,21 @@
     });
   }
 
+  /* --- Bandsintown widget: lazy-load on scroll -------------- */
+  const gigsSection = document.getElementById('gigs');
+  if (gigsSection) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) {
+        obs.disconnect();
+        const s = document.createElement('script');
+        s.charset = 'utf-8';
+        s.src = 'https://widgetv3.bandsintown.com/main.min.js';
+        document.head.appendChild(s);
+      }
+    }, { rootMargin: '400px' });
+    observer.observe(gigsSection);
+  }
+
   /* --- Consolidated keyboard handler ------------------------ */
   document.addEventListener('keydown', e => {
     if (lightbox && lightbox.classList.contains('open')) {
