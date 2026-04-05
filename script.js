@@ -97,7 +97,7 @@
     reviewLightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     const focusable = getFocusable(reviewLightbox);
-    if (focusable.length) focusable[0].focus();
+    requestAnimationFrame(() => { if (focusable.length) focusable[0].focus(); });
   }
 
   function closeReviewLightbox() {
@@ -105,7 +105,8 @@
     reviewLightbox.classList.remove('open');
     reviewLightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    if (reviewLightboxTrigger) reviewLightboxTrigger.focus();
+    const trigger = reviewLightboxTrigger;
+    requestAnimationFrame(() => { if (trigger) trigger.focus(); });
   }
 
   if (reviewLightbox) {
@@ -149,7 +150,7 @@
       }
     }
     const focusable = getFocusable(videoLightbox);
-    if (focusable.length) focusable[0].focus();
+    requestAnimationFrame(() => { if (focusable.length) focusable[0].focus(); });
   }
 
   function closeVideoLightbox() {
@@ -161,7 +162,8 @@
       igVideo.pause();
       igVideo.currentTime = 0;
     }
-    if (videoLightboxTrigger) videoLightboxTrigger.focus();
+    const trigger = videoLightboxTrigger;
+    requestAnimationFrame(() => { if (trigger) trigger.focus(); });
   }
 
   if (videoLightbox) {
@@ -177,18 +179,18 @@
   // Photos are listed here. Add/remove filenames as needed.
   // All photos must be in assets/photos/
   const PHOTOS = [
-    'IMG_1272.webp',
-    'IMG_0761.webp',
-    'IMG_0764.webp',
-    'IMG_0812.webp',
-    'IMG_0889.webp',
-    'IMG_1978.webp',
-    'IMG_2049.webp',
-    'IMG_2248.webp',
-    'IMG_4732.webp',
-    'IMG_4877.webp',
-    'IMG_4977.webp',
-    'IMG_1447.webp',
+    { f: 'IMG_1272.webp', w: 683,  h: 1024 },
+    { f: 'IMG_0761.webp', w: 1024, h: 683  },
+    { f: 'IMG_0764.webp', w: 1024, h: 683  },
+    { f: 'IMG_0812.webp', w: 1024, h: 683  },
+    { f: 'IMG_0889.webp', w: 1024, h: 683  },
+    { f: 'IMG_1978.webp', w: 1024, h: 683  },
+    { f: 'IMG_2049.webp', w: 1024, h: 683  },
+    { f: 'IMG_2248.webp', w: 1024, h: 683  },
+    { f: 'IMG_4732.webp', w: 1024, h: 683  },
+    { f: 'IMG_4877.webp', w: 1024, h: 683  },
+    { f: 'IMG_4977.webp', w: 1024, h: 683  },
+    { f: 'IMG_1447.webp', w: 683,  h: 1024 },
   ];
 
   // Fisher-Yates shuffle (unbiased)
@@ -211,11 +213,13 @@
       return;
     }
 
-    PHOTOS.forEach((filename, index) => {
+    PHOTOS.forEach(({ f, w, h }, index) => {
       const img = document.createElement('img');
-      img.src = `assets/photos/${filename}`;
+      img.src = `assets/photos/${f}`;
       img.alt = 'Freak Pointing live';
       img.loading = 'lazy';
+      img.width  = w;
+      img.height = h;
       img.dataset.index = index;
       img.addEventListener('click', () => openLightbox(index));
       img.addEventListener('error', () => { img.remove(); });
@@ -235,9 +239,13 @@
 
   let currentIndex = 0;
   let lightboxTrigger = null;
+  let cachedGridImages = null;
 
   function getGridImages() {
-    return grid ? Array.from(grid.querySelectorAll('img')) : [];
+    if (!cachedGridImages) {
+      cachedGridImages = grid ? Array.from(grid.querySelectorAll('img')) : [];
+    }
+    return cachedGridImages;
   }
 
   function openLightbox(index) {
@@ -250,7 +258,7 @@
     lightbox.classList.add('open');
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    if (lightboxClose) lightboxClose.focus();
+    requestAnimationFrame(() => { if (lightboxClose) lightboxClose.focus(); });
   }
 
   function closeLightbox() {
@@ -259,7 +267,8 @@
     lightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     if (lightboxImg) lightboxImg.src = '';
-    if (lightboxTrigger) lightboxTrigger.focus();
+    const trigger = lightboxTrigger;
+    requestAnimationFrame(() => { if (trigger) trigger.focus(); });
   }
 
   function showImage(index) {
