@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://freakpointing.ie/sitemap.xml
