@@ -26,7 +26,8 @@
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;1,400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;1,400&display=swap"></noscript>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -107,7 +108,10 @@
     <div class="hero-bg"></div>
     <div class="hero-content">
       <h1 class="sr-only">Freak Pointing</h1>
-      <img src="assets/FreakPointing_Logo.png" alt="Freak Pointing" class="hero-logo">
+      <picture>
+        <source type="image/webp" srcset="assets/FreakPointing_Logo-640.webp 640w, assets/FreakPointing_Logo-1280.webp 1280w" sizes="(max-width: 768px) 80vw, 577px">
+        <img src="assets/FreakPointing_Logo.png" alt="Freak Pointing" class="hero-logo" width="2507" height="1140">
+      </picture>
       <p class="hero-tagline">Dublin rock. Hard riffs. No filler.</p>
       <div class="hero-links">
         <a href="https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
@@ -133,7 +137,11 @@
       <!-- EP -->
       <div class="release-featured">
         <div class="release-featured-art">
-          <img src="assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp" alt="Too Tall To See The Moon EP artwork">
+          <img src="assets/Too_Tall_To_See_The_Moon_EP_Artwork-640.webp"
+               srcset="assets/Too_Tall_To_See_The_Moon_EP_Artwork-640.webp 640w, assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp 1200w"
+               sizes="(max-width: 768px) 90vw, 640px"
+               alt="Too Tall To See The Moon EP artwork"
+               width="640" height="640">
           <span class="release-badge">Out May 22nd 2026</span>
         </div>
         <div class="release-featured-info">
@@ -183,7 +191,11 @@
 
         <div class="single-card">
           <div class="single-art-wrap">
-            <img src="assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp" alt="The Circle Beneath single artwork">
+            <img src="assets/Too_Tall_To_See_The_Moon_EP_Artwork-640.webp"
+                 srcset="assets/Too_Tall_To_See_The_Moon_EP_Artwork-640.webp 640w, assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp 1200w"
+                 sizes="(max-width: 768px) 45vw, 300px"
+                 alt="The Circle Beneath single artwork"
+                 width="640" height="640">
             <span class="single-badge">Single</span>
           </div>
           <div class="single-info">
@@ -210,7 +222,11 @@
         </div>
 
         <div class="single-card">
-          <img src="assets/Stuck_Single_Artwork.webp" alt="Stuck single artwork">
+          <img src="assets/Stuck_Single_Artwork-640.webp"
+               srcset="assets/Stuck_Single_Artwork-640.webp 640w, assets/Stuck_Single_Artwork.webp 1200w"
+               sizes="(max-width: 768px) 45vw, 300px"
+               alt="Stuck single artwork"
+               width="640" height="640">
           <div class="single-info">
             <h4>Stuck</h4>
             <p class="single-year">2025</p>
@@ -221,7 +237,11 @@
         </div>
 
         <div class="single-card">
-          <img src="assets/Vainglorious_Single_Artwork.webp" alt="Vainglorious single artwork">
+          <img src="assets/Vainglorious_Single_Artwork-640.webp"
+               srcset="assets/Vainglorious_Single_Artwork-640.webp 640w, assets/Vainglorious_Single_Artwork.webp 1200w"
+               sizes="(max-width: 768px) 45vw, 300px"
+               alt="Vainglorious single artwork"
+               width="640" height="640">
           <div class="single-info">
             <h4>Vainglorious</h4>
             <p class="single-year">2025</p>
@@ -311,59 +331,35 @@
   <section id="gigs">
     <div class="section-inner">
       <h2 class="section-label">Gigs</h2>
-      <div class="gigs-list">
-
-        <div class="gig-row">
-          <span class="gig-date">Sun 24 May 2026</span>
-          <span class="gig-venue">The International Bar</span>
-          <span class="gig-location">Dublin</span>
-          <span class="gig-support">w/ Stitch Jones</span>
-          <a href="https://www.eventbrite.com/e/stitch-jones-freak-pointing-spargo-sons-tickets-1982184988660" target="_blank" rel="noopener noreferrer" class="gig-tickets">Tickets</a>
-        </div>
-
-        <!-- Add future gigs here in the same format:
-        <div class="gig-row">
-          <span class="gig-date">DATE</span>
-          <span class="gig-venue">VENUE NAME</span>
-          <span class="gig-location">CITY</span>
-          <span class="gig-support">w/ SUPPORT ACT (optional)</span>
-        </div>
-        -->
-
-        <div class="gigs-past-label">Recent shows</div>
-
-        <div class="gig-row gig-row--past">
-          <span class="gig-date">Fri 20 Mar 2026</span>
-          <span class="gig-venue">Sin É</span>
-          <span class="gig-location">Dublin</span>
-          <span class="gig-support">w/ Grey City Riot / Modern Grief</span>
-          <span class="gig-tickets-placeholder"></span>
-        </div>
-
-        <div class="gig-row gig-row--past">
-          <span class="gig-date">Fri 28 Nov 2025</span>
-          <span class="gig-venue">The International Bar</span>
-          <span class="gig-location">Dublin</span>
-          <span class="gig-support">w/ Bad Mothers Union / Grey City Riot</span>
-          <span class="gig-tickets-placeholder"></span>
-        </div>
-
-        <div class="gig-row gig-row--past">
-          <span class="gig-date">Sat 09 Aug 2025</span>
-          <span class="gig-venue">McDowell's Pub</span>
-          <span class="gig-location">Dublin</span>
-          <span class="gig-support">w/ Grey City Riot / Sleepy Days / Afterthought / Thumbsucker</span>
-          <span class="gig-tickets-placeholder"></span>
-        </div>
-
-        <div class="gig-row gig-row--past">
-          <span class="gig-date">Wed 20 Nov 2024</span>
-          <span class="gig-venue">The Sound House</span>
-          <span class="gig-location">Dublin</span>
-          <span class="gig-support"></span>
-          <span class="gig-tickets-placeholder"></span>
-        </div>
-
+      <div class="bit-widget-container">
+        <script charset="utf-8" src="https://widgetv3.bandsintown.com/main.min.js"></script>
+        <a class="bit-widget-initializer"
+          data-artist-name="id_15577576"
+          data-app-id="d16aa0e6f35ae238889ba49150dba35a"
+          data-background-color="rgba(0,0,0,0)"
+          data-text-color="rgba(255,255,255,1)"
+          data-bit-logo-color="rgba(255,255,255,1)"
+          data-separator-color="rgba(192,38,211,1)"
+          data-display-details="false"
+          data-display-past-dates="true"
+          data-display-start-time="true"
+          data-display-lineup="false"
+          data-button-label-capitalization="uppercase"
+          data-location-capitalization="capitalize"
+          data-event-ticket-icon="true"
+          data-event-ticket-cta-bg-color="rgba(192,38,211,1)"
+          data-event-ticket-cta-text-color="rgba(192,38,211,1)"
+          data-event-ticket-cta-border-radius="10px"
+          data-event-ticket-cta-border-width="2px"
+          data-event-ticket-cta-border-color="rgba(192,38,211,1)"
+          data-sold-out-button-clickable="false"
+          data-event-rsvp-position="hidden"
+          data-follow-section-position="hidden"
+          data-follow-section-alignment="center"
+          data-follow-section-cta-text="FOLLOW"
+          data-play-my-city-position="hidden"
+          data-bit-logo-position="hidden"
+        ></a>
       </div>
     </div>
   </section>
@@ -467,7 +463,7 @@
     <button class="lightbox-close" onclick="closeVideoLightbox()" aria-label="Close">&times;</button>
     <div class="video-lightbox-inner">
       <div class="video-lightbox-player">
-        <video id="ig-video" src="assets/videos/thumbtacks.mp4" controls playsinline></video>
+        <video id="ig-video" src="assets/videos/thumbtacks.mp4" controls playsinline preload="none"></video>
       </div>
       <div class="video-lightbox-meta">
         <div class="ig-meta-header">
