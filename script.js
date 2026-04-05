@@ -164,18 +164,18 @@
   // Photos are listed here. Add/remove filenames as needed.
   // All photos must be in assets/photos/
   const PHOTOS = [
-    'IMG_1272.jpg',
-    'IMG_0761.jpg',
-    'IMG_0764.jpg',
-    'IMG_0812.jpg',
-    'IMG_0889.jpg',
-    'IMG_1978.jpg',
-    'IMG_2049.jpg',
-    'IMG_2248.jpg',
-    'IMG_4732.jpg',
-    'IMG_4877.jpg',
-    'IMG_4977.jpg',
-    'IMG_1447.jpg',
+    'IMG_1272.webp',
+    'IMG_0761.webp',
+    'IMG_0764.webp',
+    'IMG_0812.webp',
+    'IMG_0889.webp',
+    'IMG_1978.webp',
+    'IMG_2049.webp',
+    'IMG_2248.webp',
+    'IMG_4732.webp',
+    'IMG_4877.webp',
+    'IMG_4977.webp',
+    'IMG_1447.webp',
   ];
 
   // Fisher-Yates shuffle (unbiased)
