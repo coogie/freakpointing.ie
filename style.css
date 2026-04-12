@@ -449,12 +449,12 @@ ol, ul { list-style: none; }
 #about { background: var(--grey-dark); }
 .about-inner { max-width: 700px; }
 .about-bio {
-  font-size: 18px;
   line-height: 1.8;
-  color: var(--grey);
+  color: var(--white);
+  font-size: 20px;
   margin-bottom: 20px;
 }
-.about-bio:first-of-type { color: var(--white); font-size: 20px; }
+.about-bio:last-of-type { color: var(--grey); font-size: 18px; }
 .members {
   margin-top: 48px;
   border-top: 1px solid var(--grey-mid);
