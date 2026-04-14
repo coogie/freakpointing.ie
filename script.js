@@ -10,14 +10,22 @@
   // Starts a countdown that swaps to an embed when the release date passes.
   function startCountdown(releaseDate, prefix, countdownEl, embedEl) {
     if (!countdownEl || !embedEl) return;
+
+    // Embed is visible by default. Only swap to countdown if still upcoming.
+    if (releaseDate - Date.now() <= 0) return;
+
+    countdownEl.style.display = '';
+    embedEl.style.display = 'none';
+
     const pad = n => String(n).padStart(2, '0');
+    let timer;
 
     function tick() {
       const diff = releaseDate - Date.now();
       if (diff <= 0) {
         clearInterval(timer);
         countdownEl.style.display = 'none';
-        embedEl.style.display = 'block';
+        embedEl.style.display = '';
         return;
       }
       const set = (id, val) => {
@@ -31,7 +39,7 @@
     }
 
     tick();
-    const timer = setInterval(tick, 1000);
+    timer = setInterval(tick, 1000);
   }
 
   startCountdown(
