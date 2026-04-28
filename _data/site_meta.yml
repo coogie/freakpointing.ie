@@ -1,0 +1,51 @@
+band:
+  name: Freak Pointing
+  legal_name: Freak Pointing
+  short_description: Four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.
+  long_description: A Dublin-based, four-piece rock band. Hard riffs, melodic anthems, punk energy.
+  hero_meta_description: Freak Pointing are a four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.
+  tagline: "Dublin rock. Hard riffs. No filler."
+  founded: "2020"
+  city: Dublin
+  country_code: IE
+  location_name: "Dublin, Ireland"
+  genres:
+    - Rock
+    - Hard Rock
+    - Grunge
+  banner_image:
+    url: /assets/spotify_banner.jpg
+    width: 2660
+    height: 1140
+  hero_logo:
+    src_640: assets/FreakPointing_Logo-640.webp
+    src_1280: assets/FreakPointing_Logo-1280.webp
+    fallback: assets/FreakPointing_Logo.png
+    width: 2507
+    height: 1140
+
+# Listen-on links — used in the hero CTA row and in the contact section's "Listen" group.
+streaming:
+  - label: Spotify
+    url: https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d
+    primary: true
+  - label: Bandcamp
+    url: https://freakpointing.bandcamp.com/
+  - label: Apple Music
+    url: https://music.apple.com/ie/artist/freak-pointing/1798274194
+  - label: YouTube Music
+    url: https://music.youtube.com/channel/UCItu_dHVTs4DnHFZGTwq-gw
+
+# Social links — used in the contact section's "Follow" group.
+social:
+  - label: Instagram
+    handle: "@freakpointingband"
+    url: https://instagram.com/freakpointingband
+
+# Schema.org sameAs — preserved verbatim from the original JSON-LD @graph
+# (note the trailing slashes / www. prefix differences vs the visible links).
+same_as:
+  - https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d
+  - https://freakpointing.bandcamp.com/
+  - https://music.apple.com/ie/artist/freak-pointing/1798274194
+  - https://www.instagram.com/freakpointingband/

@@ -1,0 +1,15 @@
+# Each member appears in:
+#   - the visible #about section list (uses `name` + `role`)
+#   - the JSON-LD MusicGroup.member[] array (uses `name` + `jsonld_role`)
+- name: Fearghal Traynor
+  role: Vocals
+  jsonld_role: Vocalist
+- name: Darryn Downey
+  role: "Lead & Rhythm Guitars"
+  jsonld_role: Guitarist
+- name: Daragh Cosgrove
+  role: Bass Guitar
+  jsonld_role: Bassist
+- name: Stephen Coogan
+  role: Drums
+  jsonld_role: Drummer

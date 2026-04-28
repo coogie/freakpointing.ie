@@ -1,0 +1,86 @@
+# Order in this file = display order on the site.
+# `featured: true` releases render in the top featured layout; others go in the singles grid.
+# Set `status: upcoming` to enable the countdown markup; `status: released` skips it.
+
+- id: too-tall-to-see-the-moon
+  title: Too Tall To See The Moon
+  type_label: EP
+  featured: true
+  status: upcoming
+  release_date: 2026-05-22
+  badge_text: Out May 22nd 2026
+  alt: Too Tall To See The Moon EP artwork
+  iframe_title: Too Tall To See The Moon — Freak Pointing on Spotify
+  spotify_embed_id: 17aMmqGbvERLEdyMJyXG19
+  countdown_id: ep-countdown
+  embed_id: ep-embed
+  countdown_prefix: cd
+  artwork:
+    src_640: assets/Too_Tall_To_See_The_Moon_EP_Artwork-640.webp
+    src_730: assets/Too_Tall_To_See_The_Moon_EP_Artwork-800.webp
+    src_1200: assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp
+    width: 640
+    height: 640
+    sizes: "(max-width: 768px) 90vw, 640px"
+  tracks:
+    - The Circle Beneath
+    - Third
+    - Thumb Tacks
+    - Unwound
+  jsonld:
+    schema_type: MusicAlbum
+    release_type: EPRelease
+    image_url: https://freakpointing.ie/assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp
+    num_tracks: 4
+
+- id: the-circle-beneath
+  title: The Circle Beneath
+  type_label: Single
+  featured: false
+  status: upcoming
+  year: 2026
+  alt: The Circle Beneath single artwork
+  iframe_title: The Circle Beneath — Freak Pointing on Spotify
+  spotify_embed_id: 0LGCXRF0S1Whfna4skKHYH
+  countdown_id: cb-countdown
+  embed_id: cb-embed
+  countdown_prefix: cb
+  badge_text: Single
+  artwork:
+    src_640: assets/Too_Tall_To_See_The_Moon_EP_Artwork-640.webp
+    src_1200: assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp
+    width: 640
+    height: 640
+    sizes: "(max-width: 768px) 45vw, 300px"
+
+- id: stuck
+  title: Stuck
+  type_label: Single
+  featured: false
+  status: released
+  year: 2025
+  alt: Stuck single artwork
+  iframe_title: Stuck — Freak Pointing on Spotify
+  spotify_embed_id: 3FvpyEoo9xgmtFMPjqlk7y
+  artwork:
+    src_640: assets/Stuck_Single_Artwork-640.webp
+    src_1200: assets/Stuck_Single_Artwork.webp
+    width: 640
+    height: 640
+    sizes: "(max-width: 768px) 45vw, 300px"
+
+- id: vainglorious
+  title: Vainglorious
+  type_label: Single
+  featured: false
+  status: released
+  year: 2025
+  alt: Vainglorious single artwork
+  iframe_title: Vainglorious — Freak Pointing on Spotify
+  spotify_embed_id: 0JosHP1RTykMNcM834eiWQ
+  artwork:
+    src_640: assets/Vainglorious_Single_Artwork-640.webp
+    src_1200: assets/Vainglorious_Single_Artwork.webp
+    width: 640
+    height: 640
+    sizes: "(max-width: 768px) 45vw, 300px"
