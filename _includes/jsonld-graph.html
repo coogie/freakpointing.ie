@@ -1,0 +1,62 @@
+{%- comment -%}
+Schema.org @graph generated from _data/site_meta.yml, _data/lineup.yml, and
+_data/releases.yml. The MusicEvent at the end is kept literal pending the
+gig-sync strategy decision (see most-recent design notes).
+{%- endcomment -%}
+{%- assign band = site.data.site_meta.band -%}
+{%- assign featured_releases = site.data.releases | where: "featured", true -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MusicGroup",
+      "@id": {{ site.url | append: "/#band" | jsonify }},
+      "name": {{ band.name | jsonify }},
+      "description": {{ band.long_description | jsonify }},
+      "url": {{ site.url | jsonify }},
+      "image": {{ site.url | append: band.banner_image.url | jsonify }},
+      "genre": {{ band.genres | jsonify }},
+      "foundingDate": {{ band.founded | jsonify }},
+      "foundingLocation": { "@type": "Place", "name": {{ band.location_name | jsonify }} },
+      "member": [
+        {%- for m in site.data.lineup -%}
+        { "@type": "OrganizationRole", "roleName": {{ m.jsonld_role | jsonify }}, "member": { "@type": "Person", "name": {{ m.name | jsonify }} } }{%- unless forloop.last -%},{%- endunless -%}
+        {%- endfor -%}
+      ],
+      "sameAs": {{ site.data.site_meta.same_as | jsonify }}
+    }{%- if featured_releases.size > 0 -%},
+    {%- for r in featured_releases -%}
+    {%- if r.jsonld %}
+    {
+      "@type": {{ r.jsonld.schema_type | jsonify }},
+      "name": {{ r.title | jsonify }},
+      "byArtist": { "@id": {{ site.url | append: "/#band" | jsonify }} },
+      "albumReleaseType": {{ r.jsonld.release_type | jsonify }},
+      "datePublished": {{ r.release_date | date: "%Y-%m-%d" | jsonify }},
+      "numTracks": {{ r.jsonld.num_tracks }},
+      "image": {{ r.jsonld.image_url | jsonify }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endif -%}
+    {%- endfor -%}
+    {%- endif -%},
+    {
+      "@type": "MusicEvent",
+      "name": "Freak Pointing at The International Bar",
+      "startDate": "2026-05-24",
+      "performer": { "@id": "https://freakpointing.ie/#band" },
+      "location": {
+        "@type": "MusicVenue",
+        "name": "The International Bar",
+        "address": { "@type": "PostalAddress", "addressLocality": "Dublin", "addressCountry": "IE" }
+      },
+      "url": "https://www.eventbrite.com/e/stitch-jones-freak-pointing-spargo-sons-tickets-1982184988660",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://www.eventbrite.com/e/stitch-jones-freak-pointing-spargo-sons-tickets-1982184988660",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+  ]
+}
+</script>

@@ -1,0 +1,33 @@
+title: Freak Pointing
+description: Four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.
+url: https://freakpointing.ie
+locale: en_IE
+lang: en-IE
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# jekyll-seo-tag is loaded but the site's bespoke <meta> tags (with og:image
+# dimensions, twitter cards, theme-color, etc.) are kept literal in
+# _layouts/default.html for byte-equivalent output during the scaffold.
+# Wire {% seo %} in once we're confident there's no regression.
+
+exclude:
+  - CLAUDE.md
+  - docs/
+  - .remember/
+  - .superpowers/
+  - .claude/
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .bundle/
+
+# Don't process Liquid in the photos/videos folders — these are raw assets.
+keep_files:
+  - assets
+
+# Permalinks: keep the single index page at root.
+permalink: pretty

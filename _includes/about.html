@@ -1,0 +1,48 @@
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner about-inner">
+    <div class="about-text">
+      <h2 class="section-label">About</h2>
+      <p class="about-bio">
+        Freak Pointing are a Dublin-based rock band formed in 2020, combining
+        influences from hard rock, grunge, heavy metal, and folk into a fresh,
+        distinctive sound, identifiable by vocal hooks, candid lyrics, and
+        tastefully distorted guitars. What began as a covers project quickly
+        morphed into a more creative endeavour, with original songs like live
+        favourite <em>&ldquo;Stuck&rdquo;</em> and early Bandcamp release
+        <em>&ldquo;Joke&rdquo;</em> signifying the band&apos;s shift toward
+        sharp, catchy originals.
+      </p>
+      <p class="about-bio">
+        After several personnel changes, the band cemented their sound with a
+        steady line-up in late 2023. From April 2024, the band began playing
+        regular live shows, comprised mainly of original material. In early
+        2025, <em>&ldquo;Stuck&rdquo;</em> and
+        <em>&ldquo;Vainglorious&rdquo;</em> were released on streaming
+        platforms, with the recording session for
+        <em>&ldquo;Vainglorious&rdquo;</em> being filmed for an eventual
+        promotional video.
+      </p>
+      <p class="about-bio">
+        The band went on to record four tracks at Mobius Studios, Bray, in
+        October 2025, forming the basis of the
+        <em>&ldquo;Too Tall To See The Moon&rdquo;</em> EP. Now having
+        received radio play in Ireland and the US, Freak Pointing continue to
+        hone their craft on live stages, and are currently scheduling a
+        further recording session for Summer 2026.
+      </p>
+      <p class="about-bio">
+        From Dublin stages to wherever the next one takes them, raw energy and
+        tight performances stick with you long after the last chord fades.
+      </p>
+      <ul class="members">
+        {%- for m in site.data.lineup %}
+        <li>
+          <span class="member-name">{{ m.name | escape }}</span>
+          <span class="member-role">{{ m.role | escape }}</span>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

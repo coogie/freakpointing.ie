@@ -1,5 +1,13 @@
 .DS_Store
 .superpowers/
 .claude/
+.remember/
 node_modules/
 assets/favicon-source.png
+
+# Jekyll
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.bundle/
+vendor/

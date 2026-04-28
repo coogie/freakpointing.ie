@@ -1,0 +1,24 @@
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner contact-inner">
+    <h2 class="section-label">Contact</h2>
+    <p class="contact-heading">Book us / Get in touch</p>
+    <a id="contact-email" href="#" class="contact-email"></a>
+
+    <div class="contact-links">
+      <h3 class="contact-links-label">Listen</h3>
+      <div class="link-row">
+        {%- for s in site.data.site_meta.streaming %}
+        <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" class="contact-link">{{ s.label }}</a>
+        {%- endfor %}
+      </div>
+
+      <h3 class="contact-links-label">Follow</h3>
+      <div class="link-row">
+        {%- for s in site.data.site_meta.social %}
+        <a href="{{ s.url }}" target="_blank" rel="noopener noreferrer" class="contact-link">{{ s.label }}</a>
+        {%- endfor %}
+      </div>
+    </div>
+  </div>
+</section>
