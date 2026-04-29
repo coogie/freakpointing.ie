@@ -153,8 +153,8 @@
   alt: Joke single artwork
   iframe_title: Joke — Freak Pointing on Bandcamp
   artwork:
-    src_350: https://f4.bcbits.com/img/a3937790199_2.jpg
-    src_1400: https://f4.bcbits.com/img/a3937790199_1.jpg
+    src_640: https://f4.bcbits.com/img/a3937790199_2.jpg
+    src_1200: https://f4.bcbits.com/img/a3937790199_1.jpg
     width: 350
     height: 350
     sizes: "(max-width: 768px) 45vw, 300px"
