@@ -1,12 +1,15 @@
 {%- comment -%}
   Schema.org MusicGroup, modelled on the canonical Beatles example
   (https://schema.org/MusicGroup) but rendered from:
-    - site.data.site_meta.band  (name, descriptions, founding_*, genres)
-    - site.data.lineup           (member[] with OrganizationRole)
+    - site.data.site_meta.band  (name, descriptions, founding_*, genres, tagline, email)
+    - site.data.lineup           (member[] with OrganizationRole; founder: true marks founding members)
+    - site.data.releases         (album[] cross-refs to MusicAlbum @ids; track[] cross-refs to top released singles)
     - site.social.links          (sameAs[] — single source of truth in _config.yml)
+    - site.logo                  (Organization.logo — separate from image)
     - site.url                    (URL + @id base)
 {%- endcomment -%}
 {%- assign band = site.data.site_meta.band -%}
+{%- assign hero_logo = band.hero_logo -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -14,8 +17,16 @@
   "@id": {{ site.url | append: "/#band" | jsonify }},
   "name": {{ band.name | jsonify }},
   "description": {{ band.long_description | jsonify }},
+  "slogan": {{ band.tagline | jsonify }},
+  "email": {{ band.email | jsonify }},
   "url": {{ site.url | jsonify }},
   "image": {{ site.url | append: band.banner_image.url | jsonify }},
+  "logo": {
+    "@type": "ImageObject",
+    "url": {{ site.url | append: site.logo | jsonify }},
+    "width": {{ hero_logo.width }},
+    "height": {{ hero_logo.height }}
+  },
   "sameAs": {{ site.social.links | jsonify }},
   "foundingLocation": {
     "@type": {{ band.founding_location.type | jsonify }},
@@ -25,10 +36,12 @@
   "genre": {{ band.genres | jsonify }},
   "member": [
     {%- for m in site.data.lineup -%}
+    {%- assign person_id = m.name | slugify | prepend: "/#person-" | prepend: site.url -%}
     {
       "@type": "OrganizationRole",
       "member": {
         "@type": "Person",
+        "@id": {{ person_id | jsonify }},
         "name": {{ m.name | jsonify }}
       },
       "startDate": {{ m.start_date | jsonify }}{%- if m.end_date -%},
