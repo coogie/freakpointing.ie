@@ -5,6 +5,7 @@ band:
   long_description: A Dublin-based, four-piece rock band. Hard riffs, melodic anthems, punk energy.
   hero_meta_description: Freak Pointing are a four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.
   tagline: "Dublin rock. Hard riffs. No filler."
+  email: lads@freakpointing.ie
 
   # Schema.org MusicGroup fields — used by _includes/jsonld/band.html
   founding_date: "2020"

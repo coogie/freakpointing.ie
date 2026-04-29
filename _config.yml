@@ -1,4 +1,5 @@
 _banner: &banner /assets/spotify_banner.jpg
+_logo:   &logo   /assets/FreakPointing_Logo.png
 _brand: &brand Freak Pointing
 _socials: &socials
   - https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d
@@ -19,7 +20,7 @@ accent: "#c026d3"
 # becomes `site.logo` in Liquid; nesting under a `site:` key would make it
 # `site.site.logo` and the plugin wouldn't see it. The `&banner` anchor lets
 # the same path be reused below in `defaults` without duplication.
-logo: *banner
+logo: *logo
 
 # Brand info — feeds {% seo %}'s JSON-LD WebSite block (name, sameAs).
 social:
