@@ -1,0 +1,35 @@
+{%- comment -%}
+  Schema.org VideoObject[] — one node per entry in _data/videos.yml. Rendered
+  from _includes/video.html. Each video cross-references the band MusicGroup
+  via about.@id.
+
+  hosting: self     → contentUrl/thumbnailUrl prefixed with site.url for absolute URLs.
+  hosting: youtube  → contentUrl, thumbnailUrl, embedUrl all derived from youtube_id.
+{%- endcomment -%}
+{%- for v in site.data.videos -%}
+{%- assign band_id = site.url | append: "/#band" -%}
+{%- assign video_id = v.id | prepend: "/#video-" | prepend: site.url -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "@id": {{ video_id | jsonify }},
+  "name": {{ v.name | jsonify }},
+  "description": {{ v.description | jsonify }},
+  "uploadDate": {{ v.upload_date | jsonify }},
+  "about": { "@id": {{ band_id | jsonify }} },
+  {%- if v.hosting == "youtube" -%}
+  "embedUrl": {{ "https://www.youtube.com/embed/" | append: v.youtube_id | jsonify }},
+  "contentUrl": {{ "https://www.youtube.com/watch?v=" | append: v.youtube_id | jsonify }},
+  "thumbnailUrl": {{ "https://i.ytimg.com/vi/" | append: v.youtube_id | append: "/maxresdefault.jpg" | jsonify }}
+  {%- else -%}
+  "contentUrl": {{ site.url | append: v.content_url | jsonify }},
+  "thumbnailUrl": {{ site.url | append: v.thumbnail_url | jsonify }}
+  {%- endif -%}
+  {%- if v.same_as -%}
+  ,
+  "sameAs": {{ v.same_as | jsonify }}
+  {%- endif %}
+}
+</script>
+{% endfor -%}

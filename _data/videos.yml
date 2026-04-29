@@ -1,0 +1,23 @@
+# Video metadata for VideoObject JSON-LD via _includes/jsonld/videos.html.
+# Required by Google rich-result eligibility: name, description, thumbnailUrl, uploadDate.
+#
+# `hosting: self` → contentUrl + thumbnailUrl from explicit fields below.
+# `hosting: youtube` → all URLs derived from `youtube_id` in the template.
+#
+# Pre-deploy: replace all "TODO" values with real strings/dates before pushing.
+- id: thumbtacks-live
+  name: "Thumb Tacks (Live)"
+  description: "TODO — 1-sentence description"
+  upload_date: "TODO"  # YYYY-MM-DD
+  hosting: self
+  content_url: /assets/videos/thumbtacks.mp4
+  thumbnail_url: /assets/videos/thumbtacks-800.webp
+  same_as:
+    - https://www.instagram.com/freakpointingband/p/DWQ4JmijZU2/
+
+- id: youtube-jqkvxvb9bbo
+  name: "TODO video title"
+  description: "TODO — 1-sentence description"
+  upload_date: "TODO"  # YYYY-MM-DD
+  hosting: youtube
+  youtube_id: JQkVXvB9BBo
