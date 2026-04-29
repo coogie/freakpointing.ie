@@ -1,0 +1,41 @@
+{%- comment -%}
+  Schema.org MusicGroup, modelled on the canonical Beatles example
+  (https://schema.org/MusicGroup) but rendered from:
+    - site.data.site_meta.band  (name, descriptions, founding_*, genres)
+    - site.data.lineup           (member[] with OrganizationRole)
+    - site.social.links          (sameAs[] — single source of truth in _config.yml)
+    - site.url                    (URL + @id base)
+{%- endcomment -%}
+{%- assign band = site.data.site_meta.band -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "@id": {{ site.url | append: "/#band" | jsonify }},
+  "name": {{ band.name | jsonify }},
+  "description": {{ band.long_description | jsonify }},
+  "url": {{ site.url | jsonify }},
+  "image": {{ site.url | append: band.banner_image.url | jsonify }},
+  "sameAs": {{ site.social.links | jsonify }},
+  "foundingLocation": {
+    "@type": {{ band.founding_location.type | jsonify }},
+    "name": {{ band.founding_location.name | jsonify }}
+  },
+  "foundingDate": {{ band.founding_date | jsonify }},
+  "genre": {{ band.genres | jsonify }},
+  "member": [
+    {%- for m in site.data.lineup -%}
+    {
+      "@type": "OrganizationRole",
+      "member": {
+        "@type": "Person",
+        "name": {{ m.name | jsonify }}
+      },
+      "startDate": {{ m.start_date | jsonify }}{%- if m.end_date -%},
+      "endDate": {{ m.end_date | jsonify }}{%- endif -%},
+      "roleName": {{ m.jsonld_role | jsonify }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor %}
+  ]
+}
+</script>

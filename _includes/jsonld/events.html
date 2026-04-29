@@ -1,0 +1,86 @@
+{%- comment -%}
+  Schema.org MusicEvent — runtime, NOT static. Fetches Bandsintown REST API
+  and injects one `<script type="application/ld+json">` per upcoming event
+  into <head>. Mirrors the visible Bandsintown widget's data source so the
+  structured data and the visible gigs list can never drift.
+
+  Fails silently if Bandsintown is unreachable — the widget handles the
+  visible UI on its own. Each event cross-references the band MusicGroup via
+  performer.@id matching `_includes/jsonld/band.html`.
+{%- endcomment -%}
+<script>
+(function () {
+  var APP_ID    = 'd16aa0e6f35ae238889ba49150dba35a';
+  var ARTIST_ID = 'id_15577576';
+  var SITE_URL  = {{ site.url | jsonify }};
+  var BAND_ID   = SITE_URL + '/#band';
+  var endpoint  = 'https://rest.bandsintown.com/artists/' + ARTIST_ID +
+                  '/events?app_id=' + APP_ID + '&date=upcoming';
+
+  function availabilityFor(status) {
+    var s = (status || '').toLowerCase().replace(/[ _-]/g, '');
+    if (s === 'soldout') return 'https://schema.org/SoldOut';
+    if (s === 'preorder' || s === 'presale') return 'https://schema.org/PreOrder';
+    return 'https://schema.org/InStock';
+  }
+
+  function buildEventNode(event) {
+    var venue = event.venue || {};
+    var offers = (event.offers || []).map(function (o) {
+      return {
+        '@type': 'Offer',
+        'url': o.url,
+        'availability': availabilityFor(o.status)
+      };
+    });
+    var address = {
+      '@type': 'PostalAddress',
+      'streetAddress': venue.street_address || undefined,
+      'postalCode': venue.postal_code || undefined,
+      'addressLocality': venue.city,
+      'addressRegion': venue.region || undefined,
+      'addressCountry': venue.country
+    };
+    var node = {
+      '@context': 'https://schema.org',
+      '@type': 'MusicEvent',
+      '@id': SITE_URL + '/#event-' + event.id,
+      'name': event.title || ('Freak Pointing at ' + (venue.name || 'TBA')),
+      'startDate': event.starts_at || event.datetime,
+      'endDate': event.ends_at || undefined,
+      'performer': { '@id': BAND_ID },
+      'location': {
+        '@type': 'MusicVenue',
+        'name': venue.name,
+        'address': address
+      },
+      'url': event.url,
+      'eventStatus': 'https://schema.org/EventScheduled',
+      'eventAttendanceMode': 'https://schema.org/OfflineEventAttendanceMode'
+    };
+    if (venue.latitude && venue.longitude) {
+      node.location.geo = {
+        '@type': 'GeoCoordinates',
+        'latitude': venue.latitude,
+        'longitude': venue.longitude
+      };
+    }
+    if (offers.length === 1) node.offers = offers[0];
+    else if (offers.length > 1) node.offers = offers;
+    return node;
+  }
+
+  fetch(endpoint)
+    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function (events) {
+      if (!Array.isArray(events) || events.length === 0) return;
+      events.forEach(function (e) {
+        var s = document.createElement('script');
+        s.type = 'application/ld+json';
+        s.textContent = JSON.stringify(buildEventNode(e));
+        document.head.appendChild(s);
+      });
+    })
+    .catch(function () { /* silent — widget handles the visible UI */ });
+})();
+</script>

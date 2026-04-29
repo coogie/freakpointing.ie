@@ -1,0 +1,61 @@
+{%- comment -%}
+  Schema.org MusicAlbum per release, modelled on the canonical "Let It Be"
+  example (https://schema.org/MusicAlbum). Emits one <script> block per
+  release that has a `jsonld:` sub-hash in _data/releases.yml.
+
+  Cross-references:
+    - byArtist: { @id } → resolves to MusicGroup in _includes/jsonld/band.html
+    - sameAs[0] is auto-built from spotify_embed_id; extras pulled from
+      `jsonld.same_as` array (e.g. Bandcamp / Apple Music album URLs).
+      Don't add the Spotify URL to `same_as` in YAML — it would duplicate.
+    - genre defaults to the band's genres; can be overridden via jsonld.genres
+    - track ItemList is built from the release's `tracks:` array; if absent,
+      `numTracks` is emitted from `jsonld.num_tracks` instead
+{%- endcomment -%}
+{%- assign jsonld_releases = site.data.releases | where_exp: "r", "r.jsonld" -%}
+{%- for r in jsonld_releases -%}
+{%- assign spotify_album_url = "https://open.spotify.com/album/" | append: r.spotify_embed_id -%}
+{%- assign genres = r.jsonld.genres | default: site.data.site_meta.band.genres -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": {{ r.jsonld.schema_type | jsonify }},
+  "@id": {{ site.url | append: "/#release-" | append: r.id | jsonify }},
+  "name": {{ r.title | jsonify }},
+  "byArtist": { "@id": {{ site.url | append: "/#band" | jsonify }} },
+  {%- if r.jsonld.production_type %}
+  "albumProductionType": {{ r.jsonld.production_type | jsonify }},
+  {%- endif %}
+  "albumReleaseType": {{ r.jsonld.release_type | jsonify }},
+  {%- if r.release_date %}
+  "datePublished": {{ r.release_date | date: "%Y-%m-%d" | jsonify }},
+  {%- elsif r.year %}
+  "datePublished": {{ r.year | jsonify }},
+  {%- endif %}
+  "image": {{ r.jsonld.image_url | jsonify }},
+  "genre": {{ genres | jsonify }},
+  "sameAs": [
+    {{ spotify_album_url | jsonify }}
+    {%- for url in r.jsonld.same_as -%},
+    {{ url | jsonify }}
+    {%- endfor %}
+  ]
+  {%- if r.tracks -%}
+  ,
+  "track": {
+    "@type": "ItemList",
+    "numberOfItems": {{ r.tracks.size }},
+    "itemListElement": [
+      {%- for t in r.tracks -%}
+      {%- assign track_id = t | slugify | prepend: "/#track-" | prepend: site.url %}
+      { "@type": "ListItem", "position": {{ forloop.index }}, "item": { "@type": "MusicRecording", "@id": {{ track_id | jsonify }}, "name": {{ t | jsonify }} } }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor %}
+    ]
+  }
+  {%- elsif r.jsonld.num_tracks -%}
+  ,
+  "numTracks": {{ r.jsonld.num_tracks }}
+  {%- endif %}
+}
+</script>
+{% endfor -%}

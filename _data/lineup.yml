@@ -1,15 +1,26 @@
 # Each member appears in:
 #   - the visible #about section list (uses `name` + `role`)
-#   - the JSON-LD MusicGroup.member[] array (uses `name` + `jsonld_role`)
+#   - JSON-LD MusicGroup.member[] OrganizationRole nodes (uses `name`,
+#     `jsonld_role`, `start_date`, optional `end_date`)
+#
+# Lineup-cement date per the about-bio: "the band cemented their sound with a
+# steady line-up in late 2023". Adjust per-member if the actual join date
+# differs (some members were in earlier line-ups going back to 2020).
 - name: Fearghal Traynor
   role: Vocals
   jsonld_role: Vocalist
+  start_date: "2023-10"
 - name: Darryn Downey
   role: "Lead & Rhythm Guitars"
-  jsonld_role: Guitarist
+  jsonld_role:
+    - Lead Guitar
+    - Rhythm Guitar
+  start_date: "2023-10"
 - name: Daragh Cosgrove
   role: Bass Guitar
   jsonld_role: Bassist
+  start_date: "2023-10"
 - name: Stephen Coogan
   role: Drums
   jsonld_role: Drummer
+  start_date: "2023-10"
