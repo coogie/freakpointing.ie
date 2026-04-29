@@ -18,6 +18,7 @@ layout: compress
   <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/apple-touch-icon.png' | relative_url }}">
   <meta name="theme-color" content="{{ site.accent }}">
   {% include head-critical.html %}
+  {% include jsonld/website.html %}
   <link rel="preload" href="{{ '/style.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="{{ '/style.css' | relative_url }}"></noscript>
   <script src="{{ '/script.js' | relative_url }}" defer></script>
