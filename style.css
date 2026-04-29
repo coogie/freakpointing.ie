@@ -1142,7 +1142,7 @@ button.video-slot {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transition: color 120ms ease;
+  transition: color 0.15s ease;
 }
 
 #faq .faq-item summary::-webkit-details-marker { display: none; }
@@ -1152,12 +1152,18 @@ button.video-slot {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--accent);
-  transition: transform 200ms ease;
+  transition: transform 0.2s ease;
 }
 
 #faq .faq-item[open] summary::after { transform: rotate(45deg); }
 
-#faq .faq-item summary:hover { color: var(--accent); }
+#faq .faq-item summary:hover,
+#faq .faq-item summary:focus-visible { color: var(--accent); }
+
+#faq .faq-item summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
 
 #faq .faq-answer {
   padding: 0 0 1.25rem 0;
