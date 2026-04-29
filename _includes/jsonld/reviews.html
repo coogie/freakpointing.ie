@@ -29,6 +29,9 @@
     "name": {{ rev.publisher.name | jsonify }}
   },
   "reviewBody": {{ rev.body | strip | jsonify }},
+  {%- if rev.same_as %}
+  "sameAs": {{ rev.same_as | jsonify }},
+  {%- endif %}
   "datePublished": {{ rev.date_published | jsonify }}
 }
 </script>

@@ -12,7 +12,7 @@
   "@type": "FAQPage",
   "@id": {{ site.url | append: "/#faq" | jsonify }},
   "mainEntity": [
-    {%- for f in site.data.faqs -%}
+    {%- for f in site.data.faqs %}
     {
       "@type": "Question",
       "name": {{ f.question | jsonify }},

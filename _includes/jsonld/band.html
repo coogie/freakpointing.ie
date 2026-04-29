@@ -35,19 +35,19 @@
   "foundingDate": {{ band.founding_date | jsonify }},
   "genre": {{ band.genres | jsonify }},
   {%- assign founders = site.data.lineup | where: "founder", true -%}
-  {%- if founders.size > 0 -%}
+  {%- if founders.size > 0 %}
   "founder": [
     {%- for f in founders -%}
-    {%- assign fid = f.name | slugify | prepend: "/#person-" | prepend: site.url -%}
+    {%- assign fid = f.name | slugify | prepend: "/#person-" | prepend: site.url %}
     { "@id": {{ fid | jsonify }} }{%- unless forloop.last -%},{%- endunless -%}
     {%- endfor %}
   ],
   {%- endif %}
   {%- assign jsonld_releases = site.data.releases | where_exp: "r", "r.jsonld" -%}
-  {%- if jsonld_releases.size > 0 -%}
+  {%- if jsonld_releases.size > 0 %}
   "album": [
     {%- for r in jsonld_releases -%}
-    {%- assign rid = r.id | prepend: "/#release-" | prepend: site.url -%}
+    {%- assign rid = r.id | prepend: "/#release-" | prepend: site.url %}
     { "@id": {{ rid | jsonify }} }{%- unless forloop.last -%},{%- endunless -%}
     {%- endfor %}
   ],
@@ -56,7 +56,7 @@
         | where: "type_label", "Single"
         | where: "status", "released"
         | where_exp: "r", "r.hidden != true" -%}
-  {%- if top_singles.size > 0 -%}
+  {%- if top_singles.size > 0 %}
   "track": [
     {%- for r in top_singles -%}
     {%- comment -%}
@@ -64,14 +64,14 @@
       pattern matches what _includes/jsonld/releases.html line 51 emits.
     {%- endcomment -%}
     {%- assign track_name = r.tracks | first -%}
-    {%- assign tid = track_name | slugify | prepend: "/#track-" | prepend: site.url -%}
+    {%- assign tid = track_name | slugify | prepend: "/#track-" | prepend: site.url %}
     { "@id": {{ tid | jsonify }} }{%- unless forloop.last -%},{%- endunless -%}
     {%- endfor %}
   ],
   {%- endif %}
   "member": [
     {%- for m in site.data.lineup -%}
-    {%- assign person_id = m.name | slugify | prepend: "/#person-" | prepend: site.url -%}
+    {%- assign person_id = m.name | slugify | prepend: "/#person-" | prepend: site.url %}
     {
       "@type": "OrganizationRole",
       "member": {
