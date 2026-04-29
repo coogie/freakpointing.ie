@@ -3,12 +3,10 @@
 #
 # `hosting: self` → contentUrl + thumbnailUrl from explicit fields below.
 # `hosting: youtube` → all URLs derived from `youtube_id` in the template.
-#
-# Pre-deploy: replace all "TODO" values with real strings/dates before pushing.
 - id: thumbtacks-live
   name: "Thumb Tacks (Live)"
-  description: "TODO — 1-sentence description"
-  upload_date: "TODO"  # YYYY-MM-DD
+  description: "Freak Pointing playing Thumb Tacks live at Sin É in Dublin, Ireland."
+  upload_date: "2026-03-24"  # YYYY-MM-DD
   hosting: self
   content_url: /assets/videos/thumbtacks.mp4
   thumbnail_url: /assets/videos/thumbtacks-800.webp
@@ -16,8 +14,8 @@
     - https://www.instagram.com/freakpointingband/p/DWQ4JmijZU2/
 
 - id: youtube-jqkvxvb9bbo
-  name: "TODO video title"
-  description: "TODO — 1-sentence description"
-  upload_date: "TODO"  # YYYY-MM-DD
+  name: "Freak Pointing: Vainglorious"
+  description: "Freak Pointing's music video of the recording process for their song \"Vainglorious\"."
+  upload_date: "2025-02-14"  # YYYY-MM-DD
   hosting: youtube
   youtube_id: JQkVXvB9BBo
