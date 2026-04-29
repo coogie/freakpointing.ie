@@ -1,0 +1,35 @@
+{%- comment -%}
+  Schema.org Review[] — one node per entry in _data/reviews.yml. Each cross-
+  references the reviewed release's MusicAlbum @id (matching the pattern in
+  _includes/jsonld/releases.html). Rendered from _includes/press.html.
+
+  Google review-snippet eligibility requires the reviewed content to be visible
+  on the same page; press.html renders the visible quote, satisfying this.
+{%- endcomment -%}
+{%- for rev in site.data.reviews -%}
+{%- assign release_id = rev.reviewed_release | prepend: "/#release-" | prepend: site.url -%}
+{%- assign review_id = rev.id | prepend: "/#review-" | prepend: site.url -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "@id": {{ review_id | jsonify }},
+  "itemReviewed": { "@id": {{ release_id | jsonify }} },
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": {{ rev.rating | jsonify }},
+    "bestRating": {{ rev.best_rating | jsonify }}
+  },
+  "author": {
+    "@type": "Person",
+    "name": {{ rev.reviewer.name | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ rev.publisher.name | jsonify }}
+  },
+  "reviewBody": {{ rev.body | strip | jsonify }},
+  "datePublished": {{ rev.date_published | jsonify }}
+}
+</script>
+{% endfor -%}
