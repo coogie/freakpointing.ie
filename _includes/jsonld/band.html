@@ -34,6 +34,15 @@
   },
   "foundingDate": {{ band.founding_date | jsonify }},
   "genre": {{ band.genres | jsonify }},
+  {%- assign founders = site.data.lineup | where: "founder", true -%}
+  {%- if founders.size > 0 -%}
+  "founder": [
+    {%- for f in founders -%}
+    {%- assign fid = f.name | slugify | prepend: "/#person-" | prepend: site.url -%}
+    { "@id": {{ fid | jsonify }} }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor %}
+  ],
+  {%- endif %}
   "member": [
     {%- for m in site.data.lineup -%}
     {%- assign person_id = m.name | slugify | prepend: "/#person-" | prepend: site.url -%}
