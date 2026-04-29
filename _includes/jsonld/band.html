@@ -43,6 +43,15 @@
     {%- endfor %}
   ],
   {%- endif %}
+  {%- assign jsonld_releases = site.data.releases | where_exp: "r", "r.jsonld" -%}
+  {%- if jsonld_releases.size > 0 -%}
+  "album": [
+    {%- for r in jsonld_releases -%}
+    {%- assign rid = r.id | prepend: "/#release-" | prepend: site.url -%}
+    { "@id": {{ rid | jsonify }} }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor %}
+  ],
+  {%- endif %}
   "member": [
     {%- for m in site.data.lineup -%}
     {%- assign person_id = m.name | slugify | prepend: "/#person-" | prepend: site.url -%}
