@@ -49,13 +49,6 @@
     document.getElementById('ep-embed')
   );
 
-  startCountdown(
-    new Date('2026-04-15T00:00:00+01:00'),
-    'cb',
-    document.getElementById('cb-countdown'),
-    document.getElementById('cb-embed')
-  );
-
   /* --- Contact email (scraper protection) ------------------- */
   const emailEl = document.getElementById('contact-email');
   if (emailEl) {
