@@ -5,14 +5,17 @@ band:
   long_description: A Dublin-based, four-piece rock band. Hard riffs, melodic anthems, punk energy.
   hero_meta_description: Freak Pointing are a four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.
   tagline: "Dublin rock. Hard riffs. No filler."
-  founded: "2020"
-  city: Dublin
-  country_code: IE
-  location_name: "Dublin, Ireland"
+
+  # Schema.org MusicGroup fields — used by _includes/jsonld/band.html
+  founding_date: "2020"
+  founding_location:
+    type: City
+    name: Dublin
   genres:
     - Rock
     - Hard Rock
     - Grunge
+
   banner_image:
     url: /assets/spotify_banner.jpg
     width: 2660
@@ -42,10 +45,6 @@ social:
     handle: "@freakpointingband"
     url: https://instagram.com/freakpointingband
 
-# Schema.org sameAs — preserved verbatim from the original JSON-LD @graph
-# (note the trailing slashes / www. prefix differences vs the visible links).
-same_as:
-  - https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d
-  - https://freakpointing.bandcamp.com/
-  - https://music.apple.com/ie/artist/freak-pointing/1798274194
-  - https://www.instagram.com/freakpointingband/
+# Schema.org `sameAs` lives in _config.yml (`social.links`) — single source of
+# truth shared between the {% seo %} plugin and our hand-rolled JSON-LD.
+# Reference as `site.social.links` directly in templates.

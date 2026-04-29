@@ -29,29 +29,46 @@
     - Unwound
   jsonld:
     schema_type: MusicAlbum
-    release_type: EPRelease
+    release_type: https://schema.org/EPRelease
+    production_type: https://schema.org/StudioAlbum
     image_url: https://freakpointing.ie/assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp
-    num_tracks: 4
+    # `numTracks` and `track` ItemList both auto-derive from the `tracks:` list above.
+    # `same_as` is the verbatim sameAs list — list each platform URL explicitly.
+    # TODO: add Apple Music album URL once published (2026-05-22). Pre-release
+    # content isn't indexed by the iTunes Search API, so the public URL
+    # `https://music.apple.com/ie/album/<slug>/<numeric-id>` won't be
+    # discoverable via `https://itunes.apple.com/lookup?id=1798274194&entity=album`
+    # until the EP goes live. The artists.apple.com AMI identifier
+    # (ami:release:5d0dd75bac5284dc36858d2841eb132b) is internal-only.
+    same_as:
+      - https://freakpointing.bandcamp.com/album/too-tall-to-see-the-moon
 
 - id: the-circle-beneath
   title: The Circle Beneath
   type_label: Single
   featured: false
-  status: upcoming
+  status: released
   year: 2026
+  release_date: 2026-04-15
   alt: The Circle Beneath single artwork
   iframe_title: The Circle Beneath — Freak Pointing on Spotify
   spotify_embed_id: 0LGCXRF0S1Whfna4skKHYH
-  countdown_id: cb-countdown
-  embed_id: cb-embed
-  countdown_prefix: cb
-  badge_text: Single
   artwork:
     src_640: assets/Too_Tall_To_See_The_Moon_EP_Artwork-640.webp
     src_1200: assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp
     width: 640
     height: 640
     sizes: "(max-width: 768px) 45vw, 300px"
+  tracks:
+    - The Circle Beneath
+  jsonld:
+    schema_type: MusicAlbum
+    release_type: https://schema.org/SingleRelease
+    production_type: https://schema.org/StudioAlbum
+    image_url: https://freakpointing.ie/assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp
+    same_as:
+      - https://music.apple.com/ie/album/the-circle-beneath-single/1888602450
+      - https://freakpointing.bandcamp.com/track/the-circle-beneath
 
 - id: stuck
   title: Stuck
@@ -59,6 +76,7 @@
   featured: false
   status: released
   year: 2025
+  release_date: 2025-05-09
   alt: Stuck single artwork
   iframe_title: Stuck — Freak Pointing on Spotify
   spotify_embed_id: 3FvpyEoo9xgmtFMPjqlk7y
@@ -68,6 +86,16 @@
     width: 640
     height: 640
     sizes: "(max-width: 768px) 45vw, 300px"
+  tracks:
+    - Stuck
+  jsonld:
+    schema_type: MusicAlbum
+    release_type: https://schema.org/SingleRelease
+    production_type: https://schema.org/StudioAlbum
+    image_url: https://freakpointing.ie/assets/Stuck_Single_Artwork.webp
+    # Bandcamp URL: add when known. Spotify auto-derived from spotify_embed_id.
+    same_as:
+      - https://music.apple.com/ie/album/stuck-single/1813983498
 
 - id: vainglorious
   title: Vainglorious
@@ -75,6 +103,7 @@
   featured: false
   status: released
   year: 2025
+  release_date: 2025-02-14
   alt: Vainglorious single artwork
   iframe_title: Vainglorious — Freak Pointing on Spotify
   spotify_embed_id: 0JosHP1RTykMNcM834eiWQ
@@ -84,3 +113,13 @@
     width: 640
     height: 640
     sizes: "(max-width: 768px) 45vw, 300px"
+  tracks:
+    - Vainglorious
+  jsonld:
+    schema_type: MusicAlbum
+    release_type: https://schema.org/SingleRelease
+    production_type: https://schema.org/StudioAlbum
+    image_url: https://freakpointing.ie/assets/Vainglorious_Single_Artwork.webp
+    # Bandcamp URL: add when known. Spotify auto-derived from spotify_embed_id.
+    same_as:
+      - https://music.apple.com/ie/album/vainglorious-single/1798275210
