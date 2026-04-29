@@ -18,7 +18,7 @@
   "description": {{ v.description | jsonify }},
   "uploadDate": {{ v.upload_date | jsonify }},
   "about": { "@id": {{ band_id | jsonify }} },
-  {%- if v.hosting == "youtube" -%}
+  {%- if v.hosting == "youtube" %}
   "embedUrl": {{ "https://www.youtube.com/embed/" | append: v.youtube_id | jsonify }},
   "contentUrl": {{ "https://www.youtube.com/watch?v=" | append: v.youtube_id | jsonify }},
   "thumbnailUrl": {{ "https://i.ytimg.com/vi/" | append: v.youtube_id | append: "/maxresdefault.jpg" | jsonify }}
