@@ -52,6 +52,23 @@
     {%- endfor %}
   ],
   {%- endif %}
+  {%- assign top_singles = site.data.releases
+        | where: "type_label", "Single"
+        | where: "status", "released"
+        | where_exp: "r", "r.hidden != true" -%}
+  {%- if top_singles.size > 0 -%}
+  "track": [
+    {%- for r in top_singles -%}
+    {%- comment -%}
+      Each released single's first (and typically only) track. The track @id
+      pattern matches what _includes/jsonld/releases.html line 51 emits.
+    {%- endcomment -%}
+    {%- assign track_name = r.tracks | first -%}
+    {%- assign tid = track_name | slugify | prepend: "/#track-" | prepend: site.url -%}
+    { "@id": {{ tid | jsonify }} }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor %}
+  ],
+  {%- endif %}
   "member": [
     {%- for m in site.data.lineup -%}
     {%- assign person_id = m.name | slugify | prepend: "/#person-" | prepend: site.url -%}
