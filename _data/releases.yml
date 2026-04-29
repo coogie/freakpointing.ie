@@ -32,6 +32,8 @@
     release_type: https://schema.org/EPRelease
     production_type: https://schema.org/StudioAlbum
     image_url: https://freakpointing.ie/assets/Too_Tall_To_See_The_Moon_EP_Artwork.webp
+    review_ids:
+      - into-d-groove
     # `numTracks` and `track` ItemList both auto-derive from the `tracks:` list above.
     # `same_as` is the verbatim sameAs list — list each platform URL explicitly.
     # TODO: add Apple Music album URL once published (2026-05-22). Pre-release

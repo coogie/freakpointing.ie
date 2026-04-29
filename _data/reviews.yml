@@ -1,0 +1,21 @@
+# Press reviews. Each entry emits one Review JSON-LD node via
+# _includes/jsonld/reviews.html, cross-referenced from the reviewed release's
+# MusicAlbum node via jsonld.review_ids: in _data/releases.yml.
+#
+# `body` matches the visible quote in _includes/press.html (HTML entities
+# resolved to Unicode; JSON-LD strings can't contain HTML).
+#
+# Pre-deploy: replace TODO date_published with the real publication date.
+- id: into-d-groove
+  reviewer:
+    name: Dorn Simon
+  publisher:
+    name: Into d'Groove
+  rating: 9
+  best_rating: 10
+  date_published: "TODO"  # YYYY-MM-DD — replace before deploying
+  reviewed_release: too-tall-to-see-the-moon
+  body: |
+    Halfway through the first track I was already hooked. Fresh, loud,
+    crisp in its delivery — these guys have delivered not only a
+    listenable release, but a highly enjoyable one.
