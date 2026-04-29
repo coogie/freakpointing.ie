@@ -18,8 +18,8 @@ accent: "#c026d3"
 
 # Brand mark — feeds JSON-LD `publisher.logo` (Organization). Top-level so it
 # becomes `site.logo` in Liquid; nesting under a `site:` key would make it
-# `site.site.logo` and the plugin wouldn't see it. The `&banner` anchor lets
-# the same path be reused below in `defaults` without duplication.
+# `site.site.logo` and the plugin wouldn't see it. References the `&logo`
+# anchor (defined above); `&banner` is reused for `defaults.image.path` below.
 logo: *logo
 
 # Brand info — feeds {% seo %}'s JSON-LD WebSite block (name, sameAs).

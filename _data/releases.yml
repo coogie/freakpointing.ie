@@ -161,7 +161,7 @@
     height: 350
     sizes: "(max-width: 768px) 45vw, 300px"
   tracks:
-    - Stuck
+    - Joke
   jsonld:
     schema_type: MusicAlbum
     release_type: https://schema.org/SingleRelease
