@@ -45,7 +45,6 @@ defaults:
         path: *banner
         width: 2660
         height: 1140
-        alt: *brand
 
 exclude:
   - CLAUDE.md
