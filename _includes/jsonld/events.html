@@ -4,6 +4,11 @@
   into <head>. Mirrors the visible Bandsintown widget's data source so the
   structured data and the visible gigs list can never drift.
 
+  Deferred via requestIdleCallback so the fetch doesn't appear in the
+  Lighthouse network-dependency / critical-path tree. Google's Web
+  Rendering Service waits long enough that the deferred JSON-LD still
+  lands before indexing finalizes.
+
   Fails silently if Bandsintown is unreachable — the widget handles the
   visible UI on its own. Each event cross-references the band MusicGroup via
   performer.@id matching `_includes/jsonld/band.html`.
@@ -70,17 +75,25 @@
     return node;
   }
 
-  fetch(endpoint)
-    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-    .then(function (events) {
-      if (!Array.isArray(events) || events.length === 0) return;
-      events.forEach(function (e) {
-        var s = document.createElement('script');
-        s.type = 'application/ld+json';
-        s.textContent = JSON.stringify(buildEventNode(e));
-        document.head.appendChild(s);
-      });
-    })
-    .catch(function () { /* silent — widget handles the visible UI */ });
+  function injectGigsJsonLd() {
+    fetch(endpoint)
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (events) {
+        if (!Array.isArray(events) || events.length === 0) return;
+        events.forEach(function (e) {
+          var s = document.createElement('script');
+          s.type = 'application/ld+json';
+          s.textContent = JSON.stringify(buildEventNode(e));
+          document.head.appendChild(s);
+        });
+      })
+      .catch(function () { /* silent — widget handles the visible UI */ });
+  }
+
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(injectGigsJsonLd, { timeout: 3000 });
+  } else {
+    setTimeout(injectGigsJsonLd, 1000);
+  }
 })();
 </script>
