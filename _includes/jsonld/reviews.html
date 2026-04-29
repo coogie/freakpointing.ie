@@ -1,7 +1,9 @@
 {%- comment -%}
-  Schema.org Review[] — one node per entry in _data/reviews.yml. Each cross-
-  references the reviewed release's MusicAlbum @id (matching the pattern in
-  _includes/jsonld/releases.html). Rendered from _includes/press.html.
+  Schema.org Review[] — one node per entry in _data/reviews.yml. Each links
+  to the reviewed release's MusicAlbum @id via `itemReviewed` (single-direction
+  cross-ref; the album does NOT carry a `review:` back-pointer — emitting both
+  directions trips the schema.org validator's directional-conflict check).
+  Rendered from _includes/press.html.
 
   Google review-snippet eligibility requires the reviewed content to be visible
   on the same page; press.html renders the visible quote, satisfying this.

@@ -1,6 +1,8 @@
-# Press reviews. Each entry emits one Review JSON-LD node via
-# _includes/jsonld/reviews.html, cross-referenced from the reviewed release's
-# MusicAlbum node via jsonld.review_ids: in _data/releases.yml.
+# Press reviews. Each entry emits one standalone Review JSON-LD node via
+# _includes/jsonld/reviews.html, with `itemReviewed` pointing at the reviewed
+# release's MusicAlbum @id (single-direction cross-ref — the album does NOT
+# carry a `review:` back-pointer; the schema.org validator flags both
+# directions present as a directional conflict).
 #
 # `body` matches the visible quote in _includes/press.html (HTML entities
 # resolved to Unicode; JSON-LD strings can't contain HTML).
