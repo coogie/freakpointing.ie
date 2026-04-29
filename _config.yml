@@ -1,17 +1,50 @@
-title: Freak Pointing
-description: Four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.
+_banner: &banner /assets/spotify_banner.jpg
+_brand: &brand Freak Pointing
+_socials: &socials
+  - https://open.spotify.com/artist/3LfefkYeYlGoRGDMnarX1d
+  - https://freakpointing.bandcamp.com/
+  - https://music.apple.com/ie/artist/freak-pointing/1798274194
+  - https://www.instagram.com/freakpointingband/
+
+title: *brand
+tagline: Dublin Rock
+description: Freak Pointing are a four-piece Dublin rock band. Hard riffs, melodic anthems, punk energy.
 url: https://freakpointing.ie
 locale: en_IE
 lang: en-IE
+
+accent: "#c026d3"
+
+# Brand mark — feeds JSON-LD `publisher.logo` (Organization). Top-level so it
+# becomes `site.logo` in Liquid; nesting under a `site:` key would make it
+# `site.site.logo` and the plugin wouldn't see it. The `&banner` anchor lets
+# the same path be reused below in `defaults` without duplication.
+logo: *banner
+
+# Brand info — feeds {% seo %}'s JSON-LD WebSite block (name, sameAs).
+social:
+  name: *brand
+  links: *socials
 
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
-# jekyll-seo-tag is loaded but the site's bespoke <meta> tags (with og:image
-# dimensions, twitter cards, theme-color, etc.) are kept literal in
-# _layouts/default.html for byte-equivalent output during the scaffold.
-# Wire {% seo %} in once we're confident there's no regression.
+# Suppress static-file PDFs etc. from the generated sitemap.
+defaults:
+  - scope:
+      path: "assets"
+    values:
+      sitemap: false
+  - scope:
+      path: ""    # matches every page
+      type: pages
+    values:
+      image:
+        path: *banner
+        width: 2660
+        height: 1140
+        alt: *brand
 
 exclude:
   - CLAUDE.md
@@ -25,9 +58,4 @@ exclude:
   - vendor/
   - .bundle/
 
-# Don't process Liquid in the photos/videos folders — these are raw assets.
-keep_files:
-  - assets
-
-# Permalinks: keep the single index page at root.
 permalink: pretty

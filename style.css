@@ -1,3 +1,5 @@
+---
+---
 /* ============================================================
    FREAK POINTING — freakpointing.ie
    Style: High-contrast punk. Black base, purple/pink accent.
@@ -10,7 +12,7 @@
   --grey:       #888888;
   --grey-dark:  #1a1a1a;
   --grey-mid:   #333333;
-  --accent:     #c026d3;
+  --accent:     {{ site.accent }};
   --accent-dim: #8b1f95;
   --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
   --font-body:    'Barlow', sans-serif;
