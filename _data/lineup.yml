@@ -9,17 +9,17 @@
 - name: Fearghal Traynor
   role: Vocals
   jsonld_role: Vocalist
-  start_date: "2023-10"
+  start_date: "2020-08"
 - name: Darryn Downey
   role: "Lead & Rhythm Guitars"
   jsonld_role:
     - Lead Guitar
     - Rhythm Guitar
-  start_date: "2023-10"
+  start_date: "2020-08"
 - name: Daragh Cosgrove
   role: Bass Guitar
   jsonld_role: Bassist
-  start_date: "2023-10"
+  start_date: "2025-02"
 - name: Stephen Coogan
   role: Drums
   jsonld_role: Drummer
