@@ -6,7 +6,7 @@
     <h2 class="section-label">Music</h2>
 
     {%- assign featured = site.data.releases | where: "featured", true -%}
-    {%- assign singles  = site.data.releases | where_exp: "release", "release.featured == true and release.hidden == empty"  -%}
+    {%- assign singles  = site.data.releases | where_exp: "release", "release.featured == false and release.hidden == empty"  -%}
 
     {%- for r in featured %}
     <!-- {{ r.type_label }} -->
