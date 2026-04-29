@@ -56,15 +56,6 @@
   ,
   "numTracks": {{ r.jsonld.num_tracks }}
   {%- endif %}
-  {%- if r.jsonld.review_ids -%}
-  ,
-  "review": [
-    {%- for rid in r.jsonld.review_ids -%}
-    {%- assign full_rid = rid | prepend: "/#review-" | prepend: site.url %}
-    { "@id": {{ full_rid | jsonify }} }{%- unless forloop.last -%},{%- endunless -%}
-    {%- endfor %}
-  ]
-  {%- endif %}
 }
 </script>
 {% endfor -%}
