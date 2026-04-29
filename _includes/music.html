@@ -6,7 +6,7 @@
     <h2 class="section-label">Music</h2>
 
     {%- assign featured = site.data.releases | where: "featured", true -%}
-    {%- assign singles  = site.data.releases | where_exp: "release", "release.featured == false and release.hidden == empty"  -%}
+    {%- assign singles  = site.data.releases | where: "featured", false | where: "hidden", nil -%}
 
     {%- for r in featured %}
     <!-- {{ r.type_label }} -->
@@ -70,7 +70,7 @@
     <h3 class="subsection-label">Singles</h3>
     <div class="singles-grid">
       {%- for r in singles %}
-
+      {{ r | inspect }}
       <div class="single-card">
         {%- if r.status == "upcoming" %}
         <div class="single-art-wrap">
