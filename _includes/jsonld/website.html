@@ -1,0 +1,16 @@
+{%- comment -%}
+  Schema.org WebSite. Adds @id, language, and a publisher cross-ref to the
+  MusicGroup. Coexists with jekyll-seo-tag's auto-emitted JSON-LD; both validate.
+  Rendered from _layouts/default.html so it's always in <head>.
+{%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": {{ site.url | append: "/#website" | jsonify }},
+  "url": {{ site.url | jsonify }},
+  "name": {{ site.social.name | jsonify }},
+  "publisher": { "@id": {{ site.url | append: "/#band" | jsonify }} },
+  "inLanguage": {{ site.lang | jsonify }}
+}
+</script>
