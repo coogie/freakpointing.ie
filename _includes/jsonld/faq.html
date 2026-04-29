@@ -1,0 +1,27 @@
+{%- comment -%}
+  Schema.org FAQPage. Rendered from _includes/faq.html. The visible HTML
+  contains the same Q/A text — Google's rule is that FAQ rich results require
+  every answer to be in the rendered DOM. <details> elements are explicitly
+  allowed (the answer is in the DOM regardless of open state).
+
+  No cross-references — FAQPage is intentionally standalone per Google's spec.
+{%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": {{ site.url | append: "/#faq" | jsonify }},
+  "mainEntity": [
+    {%- for f in site.data.faqs -%}
+    {
+      "@type": "Question",
+      "name": {{ f.question | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ f.answer | jsonify }}
+      }
+    }{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor %}
+  ]
+}
+</script>

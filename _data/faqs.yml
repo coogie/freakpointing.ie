@@ -1,0 +1,17 @@
+# FAQs for the homepage. Renders both visible HTML (_includes/faq.html) and
+# JSON-LD (_includes/jsonld/faq.html) — Google's FAQPage rich-result rule
+# requires the answer text to be present in the visible DOM.
+#
+# Plain-text answers only (or limited HTML: <a>, <em>, <strong>, <p>, <ul>,
+# <ol>, <li>, <b>, <i>); answers run through Liquid's markdownify filter.
+- question: "Where is Freak Pointing from?"
+  answer: "Freak Pointing are a four-piece rock band from Dublin, Ireland, formed in 2020."
+
+- question: "Who's in Freak Pointing?"
+  answer: "Fearghal Traynor (vocals), Darryn Downey (guitar), Daragh Cosgrove (bass), and Stephen Coogan (drums)."
+
+- question: "What kind of music does Freak Pointing play?"
+  answer: "Rock — hard riffs, melodic anthems, punk energy. Influenced by hard rock and grunge."
+
+- question: "Where can I listen to Freak Pointing?"
+  answer: "Spotify, Apple Music, Bandcamp, and YouTube Music. Links are in the Listen section above."

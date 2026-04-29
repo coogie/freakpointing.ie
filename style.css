@@ -1116,3 +1116,55 @@ button.video-slot {
   .hero-links,
   .hero-scroll-hint { animation: none; opacity: 1; transform: none; }
 }
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+#faq .faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--grey-mid);
+}
+
+#faq .faq-item {
+  border-bottom: 1px solid var(--grey-mid);
+}
+
+#faq .faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.25rem 0;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: color 120ms ease;
+}
+
+#faq .faq-item summary::-webkit-details-marker { display: none; }
+
+#faq .faq-item summary::after {
+  content: "+";
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  transition: transform 200ms ease;
+}
+
+#faq .faq-item[open] summary::after { transform: rotate(45deg); }
+
+#faq .faq-item summary:hover { color: var(--accent); }
+
+#faq .faq-answer {
+  padding: 0 0 1.25rem 0;
+  color: var(--grey);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+#faq .faq-answer p { margin: 0; }
+
