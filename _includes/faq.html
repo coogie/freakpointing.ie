@@ -1,0 +1,15 @@
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <h2 class="section-label">FAQ</h2>
+    <div class="faq-list">
+      {%- for f in site.data.faqs %}
+      <details class="faq-item">
+        <summary>{{ f.question }}</summary>
+        <div class="faq-answer">{{ f.answer | markdownify }}</div>
+      </details>
+      {%- endfor %}
+    </div>
+  </div>
+</section>
+{% include jsonld/faq.html %}
