@@ -1,5 +1,48 @@
 {% include jsonld/releases.html %}
 
+<script>
+  /* --- Release countdowns ----------------------------------- */
+  // Starts a countdown that swaps to an embed when the release date passes.
+  function startCountdown(releaseDate, id) {
+    const countdownEl = document.getElementById(`${id}-countdown`);
+    const embedEl = document.getElementById(`${id}-embed`);
+    if (!countdownEl || !embedEl) return;
+
+    // Embed is visible by default. Only swap to countdown if still upcoming.
+    if (releaseDate - Date.now() <= 0) return;
+
+    countdownEl.style.display = '';
+    embedEl.style.display = 'none';
+
+    const pad = n => String(n).padStart(2, '0');
+    let timer;
+
+    const d = countdownEl.querySelector(`#${id}-days`);
+    const h = countdownEl.querySelector(`#${id}-hours`);
+    const m = countdownEl.querySelector(`#${id}-mins`);
+    const s = countdownEl.querySelector(`#${id}-secs`);
+    function tick() {
+      const diff = releaseDate - Date.now();
+      if (diff <= 0) {
+        clearInterval(timer);
+        countdownEl.style.display = 'none';
+        embedEl.style.display = '';
+        return;
+      }
+      const set = (node, val) => {
+        if (node && node.textContent !== val) node.textContent = val;
+      };
+      set(d, pad(Math.floor(diff / 86400000)));
+      set(h, pad(Math.floor((diff % 86400000) / 3600000)));
+      set(m, pad(Math.floor((diff % 3600000)  / 60000)));
+      set(s, pad(Math.floor((diff % 60000)    / 1000)));
+    }
+
+    tick();
+    timer = setInterval(tick, 1000);
+  }
+</script>
+
 <!-- MUSIC -->
 <section id="music">
   <div class="section-inner">
@@ -9,6 +52,8 @@
     {%- assign singles  = site.data.releases | where: "featured", false | where: "hidden", nil -%}
 
     {%- for r in featured %}
+    {% capture nowunix %}{{'now' | date: '%s'}}{% endcapture %}
+    {% capture releasetime %}{{r.release_date | date: '%s'}}{% endcapture %}
     <!-- {{ r.type_label }} -->
     <div class="release-featured">
       <div class="release-featured-art">
@@ -17,7 +62,9 @@
              sizes="{{ r.artwork.sizes }}"
              alt="{{ r.alt }}"
              width="{{ r.artwork.width }}" height="{{ r.artwork.height }}">
+        {% if releasetime > nowunix %}
         <span class="release-badge">{{ r.badge_text }}</span>
+        {% endif %}
       </div>
       <div class="release-featured-info">
         <p class="release-type">{{ r.type_label }}</p>
@@ -29,39 +76,8 @@
           {%- endfor %}
         </ol>
         {%- endif %}
-        <div class="release-embed">
-          {%- if r.status == "upcoming" %}
-          <div id="{{ r.countdown_id }}" class="ep-countdown" style="display:none">
-            <p class="ep-countdown-label">Out in</p>
-            <div class="countdown-units">
-              <div class="countdown-unit">
-                <span class="countdown-num" id="{{ r.countdown_prefix }}-days">00</span>
-                <span class="countdown-label">Days</span>
-              </div>
-              <span class="countdown-sep" aria-hidden="true">:</span>
-              <div class="countdown-unit">
-                <span class="countdown-num" id="{{ r.countdown_prefix }}-hours">00</span>
-                <span class="countdown-label">Hours</span>
-              </div>
-              <span class="countdown-sep" aria-hidden="true">:</span>
-              <div class="countdown-unit">
-                <span class="countdown-num" id="{{ r.countdown_prefix }}-mins">00</span>
-                <span class="countdown-label">Mins</span>
-              </div>
-              <span class="countdown-sep" aria-hidden="true">:</span>
-              <div class="countdown-unit">
-                <span class="countdown-num" id="{{ r.countdown_prefix }}-secs">00</span>
-                <span class="countdown-label">Secs</span>
-              </div>
-            </div>
-          </div>
-          <div id="{{ r.embed_id }}" class="ep-embed-reveal">
-            <iframe title="{{ r.iframe_title }}" style="border-radius:0" src="https://open.spotify.com/embed/album/{{ r.spotify_embed_id }}?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-          </div>
-          {%- else %}
-          <iframe title="{{ r.iframe_title }}" style="border-radius:0" src="https://open.spotify.com/embed/album/{{ r.spotify_embed_id }}?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-          {%- endif %}
-        </div>
+
+        {% include music-countdown-embed.html r=r %}
       </div>
     </div>
     {%- endfor %}
@@ -70,48 +86,23 @@
     <h3 class="subsection-label">Singles</h3>
     <div class="singles-grid">
       {%- for r in singles %}
+
       <div class="single-card">
-        {%- if r.status == "upcoming" %}
         <div class="single-art-wrap">
           <img src="{{ r.artwork.src_640 }}"
                srcset="{{ r.artwork.src_640 }} 640w, {{ r.artwork.src_1200 }} 1200w"
                sizes="{{ r.artwork.sizes }}"
                alt="{{ r.alt }}"
                width="{{ r.artwork.width }}" height="{{ r.artwork.height }}">
+          {%- if r.badge_text or r.type_label %}
           <span class="single-badge">{{ r.badge_text | default: r.type_label }}</span>
+          {%- endif %}
         </div>
-        {%- else %}
-        <img src="{{ r.artwork.src_640 }}"
-             srcset="{{ r.artwork.src_640 }} 640w, {{ r.artwork.src_1200 }} 1200w"
-             sizes="{{ r.artwork.sizes }}"
-             alt="{{ r.alt }}"
-             width="{{ r.artwork.width }}" height="{{ r.artwork.height }}">
-        {%- endif %}
         <div class="single-info">
           <h4>{{ r.title }}</h4>
           <p class="single-year">{{ r.year }}</p>
         </div>
-        <div class="single-embed">
-          {%- if r.status == "upcoming" %}
-          <div id="{{ r.countdown_id }}" class="ep-countdown" style="display:none">
-            <p class="ep-countdown-label">Out in</p>
-            <div class="countdown-units">
-              <div class="countdown-unit"><span class="countdown-num" id="{{ r.countdown_prefix }}-days">00</span><span class="countdown-label">Days</span></div>
-              <span class="countdown-sep" aria-hidden="true">:</span>
-              <div class="countdown-unit"><span class="countdown-num" id="{{ r.countdown_prefix }}-hours">00</span><span class="countdown-label">Hours</span></div>
-              <span class="countdown-sep" aria-hidden="true">:</span>
-              <div class="countdown-unit"><span class="countdown-num" id="{{ r.countdown_prefix }}-mins">00</span><span class="countdown-label">Mins</span></div>
-              <span class="countdown-sep" aria-hidden="true">:</span>
-              <div class="countdown-unit"><span class="countdown-num" id="{{ r.countdown_prefix }}-secs">00</span><span class="countdown-label">Secs</span></div>
-            </div>
-          </div>
-          <div id="{{ r.embed_id }}" class="ep-embed-reveal">
-            <iframe title="{{ r.iframe_title }}" style="border-radius:0" src="https://open.spotify.com/embed/album/{{ r.spotify_embed_id }}?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-          </div>
-          {%- else %}
-          <iframe title="{{ r.iframe_title }}" style="border-radius:0" src="https://open.spotify.com/embed/album/{{ r.spotify_embed_id }}?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-          {%- endif %}
-        </div>
+        {% include music-countdown-embed.html r=r %}
       </div>
       {%- endfor %}
 

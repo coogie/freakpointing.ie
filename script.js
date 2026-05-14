@@ -6,49 +6,6 @@
 (function () {
   'use strict';
 
-  /* --- Release countdowns ----------------------------------- */
-  // Starts a countdown that swaps to an embed when the release date passes.
-  function startCountdown(releaseDate, prefix, countdownEl, embedEl) {
-    if (!countdownEl || !embedEl) return;
-
-    // Embed is visible by default. Only swap to countdown if still upcoming.
-    if (releaseDate - Date.now() <= 0) return;
-
-    countdownEl.style.display = '';
-    embedEl.style.display = 'none';
-
-    const pad = n => String(n).padStart(2, '0');
-    let timer;
-
-    function tick() {
-      const diff = releaseDate - Date.now();
-      if (diff <= 0) {
-        clearInterval(timer);
-        countdownEl.style.display = 'none';
-        embedEl.style.display = '';
-        return;
-      }
-      const set = (id, val) => {
-        const el = document.getElementById(id);
-        if (el && el.textContent !== val) el.textContent = val;
-      };
-      set(`${prefix}-days`,  pad(Math.floor(diff / 86400000)));
-      set(`${prefix}-hours`, pad(Math.floor((diff % 86400000) / 3600000)));
-      set(`${prefix}-mins`,  pad(Math.floor((diff % 3600000)  / 60000)));
-      set(`${prefix}-secs`,  pad(Math.floor((diff % 60000)    / 1000)));
-    }
-
-    tick();
-    timer = setInterval(tick, 1000);
-  }
-
-  startCountdown(
-    new Date('2026-05-22T00:00:00+01:00'),
-    'cd',
-    document.getElementById('ep-countdown'),
-    document.getElementById('ep-embed')
-  );
-
   /* --- Contact email (scraper protection) ------------------- */
   const emailEl = document.getElementById('contact-email');
   if (emailEl) {
