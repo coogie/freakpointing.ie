@@ -593,6 +593,162 @@ ol, ul { list-style: none; }
   color: var(--accent);
 }
 .press-pdf-link { margin-top: 8px; }
+/* ============================================================
+   PRESS CAROUSEL
+   Append this block to the bottom of style.css, replacing the
+   existing .press-quote / .press-pdf-link rules if you wish to
+   keep things tidy, or just leave them in place — the carousel
+   wrapper styles below take precedence via specificity.
+   ============================================================ */
+
+.press-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.press-carousel-track {
+  /* JS sets transform: translateX(-N * 100%) to slide between panels */
+  display: flex;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.press-slide {
+  min-width: 100%;
+  /* Prevent content from being focusable/clickable when off-screen */
+}
+
+.press-slide[aria-hidden="true"] * {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Re-use existing .press-quote rules — no changes needed there */
+
+/* --- Carousel nav ------------------------------------------ */
+.press-carousel-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 32px;
+}
+
+.press-prev,
+.press-next {
+  background: none;
+  border: 1px solid var(--grey-mid);
+  color: var(--white);
+  font-size: 1.2rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.press-prev:hover,
+.press-next:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.press-prev:focus-visible,
+.press-next:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.press-dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* --- Dot: inactive ----------------------------------------- */
+.press-dot {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+/* Inner fill circle — dim when inactive */
+.press-dot::after {
+  content: '';
+  position: absolute;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--grey-mid);
+  transition: background 0.2s;
+}
+
+.press-dot--active::after {
+  background: var(--accent);
+}
+
+.press-dot:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* --- SVG ring injected by JS ------------------------------- */
+
+/* Hidden on inactive dots — only the active dot shows the ring */
+.press-dot__ring {
+  display: none;
+}
+
+.press-dot--active .press-dot__ring {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Rotate so the progress fill starts at 12 o'clock */
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.press-dot--active .press-dot__ring .ring-track {
+  fill: none;
+  stroke: var(--grey-mid);
+  stroke-width: 2;
+}
+
+.press-dot--active .press-dot__ring .ring-progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: butt;
+  stroke-dasharray: var(--ring-c, 50.27);
+  stroke-dashoffset: 0;
+  animation: ring-drain var(--auto-ms) linear forwards;
+}
+
+/* Pause the ring drain while the carousel is hovered or focused */
+.press-carousel--paused .press-dot--active .press-dot__ring .ring-progress {
+  animation-play-state: paused;
+}
+
+@keyframes ring-drain {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: var(--ring-c, 50.27); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .press-carousel-track { transition: none; }
+  .press-dot--active .press-dot__ring .ring-progress { animation: none; }
+}
 
 /* --- GIGS ------------------------------------------------- */
 #gigs { background: var(--grey-dark); }
