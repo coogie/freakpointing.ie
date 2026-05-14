@@ -2,22 +2,54 @@
 <section id="press">
   <div class="section-inner press-inner">
     <h2 class="section-label">Press</h2>
-    <blockquote class="press-quote">
+
+    <div class="press-carousel" id="press-carousel" aria-label="Press reviews" role="region">
+
       <p class="quote-mark">"</p>
-      <p class="quote-text">
-        Halfway through the first track I was already hooked. Fresh, loud,
-        crisp in its delivery &mdash; these guys have delivered not only a
-        listenable release, but a highly enjoyable one.
-      </p>
-      <footer class="quote-attribution">
-        <span class="quote-author">Dorn Simon</span>
-        <span class="quote-source">Into d'Groove</span>
-        <span class="quote-score">9/10</span>
-      </footer>
-    </blockquote>
-    <button class="btn btn-outline press-pdf-link" onclick="openReviewLightbox()">
-      Read full review
-    </button>
+      {%- assign reviews = site.data.reviews -%}
+      {%- for rev in reviews %}
+      <div class="press-slide" role="group" aria-roledescription="slide" aria-label="Review {{ forloop.index }} of {{ reviews.size }}">
+        <blockquote class="press-quote">
+          <p class="quote-text">{{ rev.body | strip }}</p>
+          <footer class="quote-attribution">
+            <span class="quote-author">{{ rev.reviewer.name }}</span>
+            <span class="quote-source">{{ rev.publisher.name }}</span>
+            {%- if rev.rating %}
+            <span class="quote-score">{{ rev.rating }}/{{ rev.best_rating }}</span>
+            {%- endif %}
+          </footer>
+        </blockquote>
+        {%- if rev.id == "into-d-groove" %}
+        <button class="btn btn-outline press-pdf-link" onclick="openReviewLightbox()">
+          Read full review
+        </button>
+        {%- elsif rev.link %}
+        <a href="{{ rev.link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline press-pdf-link">
+          Read full article
+        </a>
+        {%- endif %}
+      </div>
+      {%- endfor %}
+
+    </div><!-- /.press-carousel -->
+
+    {%- if reviews.size > 1 %}
+    <div class="press-carousel-nav" aria-label="Press carousel controls">
+      <button class="press-prev" id="press-prev" aria-label="Previous review" aria-controls="press-carousel">&#8592;</button>
+      <div class="press-dots" id="press-dots" role="tablist" aria-label="Press review slides">
+        {%- for rev in reviews %}
+        <button class="press-dot{% if forloop.first %} press-dot--active{% endif %}"
+                role="tab"
+                aria-selected="{{ forloop.first | downcase }}"
+                aria-controls="press-carousel"
+                data-index="{{ forloop.index0 }}"
+                aria-label="Review {{ forloop.index }}"></button>
+        {%- endfor %}
+      </div>
+      <button class="press-next" id="press-next" aria-label="Next review" aria-controls="press-carousel">&#8594;</button>
+    </div>
+    {%- endif %}
+
   </div>
 </section>
 {% include jsonld/reviews.html %}

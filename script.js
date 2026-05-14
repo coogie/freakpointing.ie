@@ -73,6 +73,149 @@
     });
   }
 
+  /* --- Press carousel --------------------------------------- */
+  const pressCarousel = document.getElementById('press-carousel');
+  if (pressCarousel) {
+    const pressSlides  = Array.from(pressCarousel.querySelectorAll('.press-slide'));
+    const pressDots    = Array.from(document.querySelectorAll('.press-dot'));
+    const pressPrev    = document.getElementById('press-prev');
+    const pressNext    = document.getElementById('press-next');
+    // The common ancestor of both .press-carousel and .press-carousel-nav —
+    // the paused class must live here so the CSS selector can reach the dots.
+    const pressSection = pressCarousel.closest('section');
+    const total        = pressSlides.length;
+
+    let AUTO_MS        = 8000;
+    let current        = 0;
+    let autoTimer      = null;
+    let remaining      = AUTO_MS;
+    let startTime      = null;
+    let isPaused       = false; // Explicitly track state
+
+    // --- SVG ring injection ----------------------------------
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+    const RADIUS = 8;
+    const CIRCUM = +(2 * Math.PI * RADIUS).toFixed(2); // ≈ 50.27
+
+    pressDots.forEach(dot => {
+      dot.style.setProperty('--ring-c', CIRCUM);
+      dot.style.setProperty('--auto-ms', `${AUTO_MS}ms`);
+
+      const svg = document.createElementNS(SVG_NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 20 20');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.classList.add('press-dot__ring');
+
+      const ringTrack = document.createElementNS(SVG_NS, 'circle');
+      ringTrack.setAttribute('cx', '10');
+      ringTrack.setAttribute('cy', '10');
+      ringTrack.setAttribute('r', RADIUS);
+      ringTrack.classList.add('ring-track');
+
+      const ringProgress = document.createElementNS(SVG_NS, 'circle');
+      ringProgress.setAttribute('cx', '10');
+      ringProgress.setAttribute('cy', '10');
+      ringProgress.setAttribute('r', RADIUS);
+      ringProgress.classList.add('ring-progress');
+
+      svg.appendChild(ringTrack);
+      svg.appendChild(ringProgress);
+      dot.appendChild(svg);
+    });
+
+    // --- Slide track -----------------------------------------
+    const slideTrack = document.createElement('div');
+    slideTrack.className = 'press-carousel-track';
+    pressSlides.forEach(s => slideTrack.appendChild(s));
+    pressCarousel.appendChild(slideTrack);
+
+    const resetRing = dot => {
+      dot.classList.remove('press-dot--active');
+      void dot.offsetWidth; // reflow — required to restart the CSS animation
+      dot.classList.add('press-dot--active');
+    };
+
+    const goTo = index => {
+      index = ((index % total) + total) % total;
+      pressSlides.forEach((s, i) => s.setAttribute('aria-hidden', i === index ? 'false' : 'true'));
+      slideTrack.style.transform = `translateX(-${index * 100}%)`;
+      
+      pressDots.forEach((d, i) => {
+        d.setAttribute('aria-selected', String(i === index));
+        if (i === index) { resetRing(d); } 
+        else { d.classList.remove('press-dot--active'); }
+      });
+      current = index;
+    };
+
+    const stopAuto = () => {
+      if (isPaused) return;
+      
+      clearTimeout(autoTimer);
+      isPaused = true;
+      pressSection.classList.add('press-carousel--paused');
+      
+      if (startTime) {
+        const elapsed = Date.now() - startTime;
+        remaining = Math.max(0, remaining - elapsed);
+      }
+      startTime = null;
+    };
+
+    const startAuto = (resetTime = false) => {
+      if (!isPaused && !resetTime) return;
+
+      clearTimeout(autoTimer);
+      isPaused = false;
+      pressSection.classList.remove('press-carousel--paused');
+      
+      if (resetTime) remaining = AUTO_MS;
+      
+      startTime = Date.now();
+      autoTimer = setTimeout(() => {
+        goTo(current + 1);
+        startAuto(true);
+      }, remaining);
+    };
+
+    const manualNav = fn => {
+      clearTimeout(autoTimer);
+      isPaused = false; 
+      fn();
+      remaining = AUTO_MS;
+      startAuto(true);
+    };
+
+    goTo(0);
+    startAuto(true);
+
+    if (pressPrev) pressPrev.addEventListener('click', () => manualNav(() => goTo(current - 1)));
+    if (pressNext) pressNext.addEventListener('click', () => manualNav(() => goTo(current + 1)));
+
+    pressDots.forEach(d => {
+      d.addEventListener('click', () => manualNav(() => goTo(Number(d.dataset.index))));
+    });
+
+    // Pause on hover/focus over the whole section so the ring freezes
+    // whether the cursor is over the quote text, the buttons, or the dots.
+    pressSection.addEventListener('mouseenter', stopAuto);
+    pressSection.addEventListener('mouseleave', () => startAuto(false));
+    pressSection.addEventListener('focusin',    stopAuto);
+    pressSection.addEventListener('focusout',   () => startAuto(false));
+
+    // Swipe support
+    let touchStartX = null;
+    pressCarousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    pressCarousel.addEventListener('touchend', e => {
+      if (touchStartX === null) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) manualNav(() => goTo(dx < 0 ? current + 1 : current - 1));
+      touchStartX = null;
+    }, { passive: true });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) stopAuto();
+  }
+
   /* Expose to inline onclick */
   window.openReviewLightbox  = openReviewLightbox;
   window.closeReviewLightbox = closeReviewLightbox;
