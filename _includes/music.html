@@ -2,13 +2,13 @@
 
 <script>
   /* --- Release countdowns ----------------------------------- */
-  // Starts a countdown that swaps to an embed when the release date passes.
+  /* Starts a countdown that swaps to an embed when the release date passes. */
   function startCountdown(releaseDate, id) {
     const countdownEl = document.getElementById(`${id}-countdown`);
     const embedEl = document.getElementById(`${id}-embed`);
     if (!countdownEl || !embedEl) return;
 
-    // Embed is visible by default. Only swap to countdown if still upcoming.
+    /* Embed is visible by default. Only swap to countdown if still upcoming. */
     if (releaseDate - Date.now() <= 0) return;
 
     countdownEl.style.display = '';
