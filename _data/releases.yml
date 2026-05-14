@@ -7,14 +7,11 @@
   type_label: EP
   featured: true
   status: upcoming
-  release_date: 2026-05-22
+  release_date: 2026-05-22T00:00:00+01:00
   badge_text: Out May 22nd 2026
   alt: Too Tall To See The Moon EP artwork
   iframe_title: Too Tall To See The Moon — Freak Pointing on Spotify
   spotify_embed_id: 17aMmqGbvERLEdyMJyXG19
-  countdown_id: ep-countdown
-  embed_id: ep-embed
-  countdown_prefix: cd
   artwork:
     src_640: assets/Too_Tall_To_See_The_Moon_EP_Artwork-640.webp
     src_730: assets/Too_Tall_To_See_The_Moon_EP_Artwork-800.webp
@@ -47,7 +44,6 @@
   title: The Circle Beneath
   type_label: Single
   featured: false
-  status: released
   year: 2026
   release_date: 2026-04-15
   alt: The Circle Beneath single artwork
@@ -80,7 +76,6 @@
   title: Stuck
   type_label: Single
   featured: false
-  status: released
   year: 2025
   release_date: 2025-05-09
   alt: Stuck single artwork
@@ -113,7 +108,6 @@
   title: Vainglorious
   type_label: Single
   featured: false
-  status: released
   year: 2025
   release_date: 2025-02-14
   alt: Vainglorious single artwork
@@ -147,7 +141,6 @@
   type_label: Single
   featured: false
   hidden: true
-  status: released
   year: 2021
   release_date: 2021-03-04
   alt: Joke single artwork
