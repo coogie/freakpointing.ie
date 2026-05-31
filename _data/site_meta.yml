@@ -39,6 +39,14 @@ streaming:
     url: https://music.apple.com/ie/artist/freak-pointing/1798274194
   - label: YouTube Music
     url: https://music.youtube.com/channel/UCItu_dHVTs4DnHFZGTwq-gw
+  - label: Amazon Music 
+    url: https://music.amazon.com/artists/B0DY8TX59P
+  - label: Tidal
+    url: https://tidal.com/artist/54814756/
+  - label: Deezer
+    url: https://www.deezer.com/en/artist/304819831
+  - label: Subvert.fm
+    url: https://www.subvert.fm/freak-pointing
 
 # Social links — used in the contact section's "Follow" group.
 social:
