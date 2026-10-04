@@ -19,10 +19,12 @@
         </div>
       </button>
 
-      <div class="video-slot">
-        <iframe src="https://www.youtube.com/embed/JQkVXvB9BBo" title="Freak Pointing live" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-      </div>
-
+      {%- assign yt = site.data.videos | where: "hosting", "youtube" -%}
+      {%- for v in yt -%}
+        <div class="video-slot">
+          <iframe src="https://www.youtube.com/embed/{{ v.youtube_id }}" title="{{ v.name }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+      {%- endfor -%}
     </div>
   </div>
 </section>
