@@ -13,6 +13,13 @@
   same_as:
     - https://www.instagram.com/freakpointingband/p/DWQ4JmijZU2/
 
+- id: youtube-pPumuZsQiQA
+  name: "Live @ Anseo"
+  description: "Freak Pointing live at Anseo, Camden Street, Oct. 2nd 2026"
+  upload_date: "2026-10-03T16:04:00.000Z"
+  hosting: youtube
+  youtube_id: pPumuZsQiQA
+
 - id: youtube-jqkvxvb9bbo
   name: "Freak Pointing: Vainglorious"
   description: "Freak Pointing's music video of the recording process for their song \"Vainglorious\"."
