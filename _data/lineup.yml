@@ -11,6 +11,7 @@
   jsonld_role: Vocalist
   start_date: "2020-08"
   founder: true
+
 - name: Darryn Downey
   role: "Lead & Rhythm Guitars"
   jsonld_role:
@@ -18,10 +19,12 @@
     - Rhythm Guitar
   start_date: "2020-08"
   founder: true
+
 - name: Daragh Cosgrove
   role: Bass Guitar
   jsonld_role: Bassist
   start_date: "2025-02"
+
 - name: Stephen Coogan
   role: Drums
   jsonld_role: Drummer

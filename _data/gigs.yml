@@ -1,0 +1,15 @@
+# Used by the `gig_redirect` plugin to generate a redirect page so don't have to
+# wait for ticketing links/events to be created before we get a poster's QR code
+# in place.
+#
+# Each entry generates a HTML page at `gig/{{ key }}` (e.g.: `https://freakpointing.ie/gig/20261216`)
+#   - key should be the YYYYMMDD of the gig
+#   - redirect_to is the ticket vendor link that the page redirects to
+#   - title is the HTML title of the redirect page and should be the event name
+- key: "20261216"
+  redirect_to: "https://www.eventbrite.ie/e/bad-mothers-union-freak-pointing-turfboy-tickets-2001769698053"
+  title: "Bad Mothers Union / Freak Pointing / TurfBoy"
+
+- key: "20261002"
+  redirect_to: "https://www.eventbrite.com/e/grey-city-riot-freak-pointing-the-threads-tickets-1982114556997"
+  title: "Grey City Riot & Freak Pointing & The Threads"
