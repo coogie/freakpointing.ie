@@ -292,6 +292,9 @@
     { f: 'IMG_4877.webp', w: 1024, h: 683  },
     { f: 'IMG_4977.webp', w: 1024, h: 683  },
     { f: 'IMG_1447.webp', w: 683,  h: 1024 },
+    { f: 'cobblestone_1.webp', w: 683,  h: 1024 },
+    { f: 'cobblestone_2.webp', w: 1024,  h: 683 },
+    { f: 'cobblestone_3.webp', w: 1024,  h: 683 },
   ];
 
   // Fisher-Yates shuffle (unbiased)
