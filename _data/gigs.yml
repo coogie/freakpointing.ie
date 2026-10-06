@@ -10,6 +10,10 @@
   redirect_to: "https://www.eventbrite.ie/e/bad-mothers-union-freak-pointing-turfboy-tickets-2001769698053"
   title: "Bad Mothers Union / Freak Pointing / TurfBoy"
 
+- key: "20261031"
+  redirect_to: "https://ie.powertik.com/events/spooky-season-2-halloween-festival-day-2?mpl=freakpointing"
+  title: "Day 2 - Spooky Season 2 [Halloween Festival]"
+
 - key: "20261002"
   redirect_to: "https://www.eventbrite.com/e/grey-city-riot-freak-pointing-the-threads-tickets-1982114556997"
   title: "Grey City Riot & Freak Pointing & The Threads"
