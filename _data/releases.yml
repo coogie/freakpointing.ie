@@ -1,12 +1,12 @@
 # Order in this file = display order on the site.
 # `featured: true` releases render in the top featured layout; others go in the singles grid.
-# Set `status: upcoming` to enable the countdown markup; `status: released` skips it.
+# Release state is derived from `release_date` (see _plugins/release_phase.rb):
+# before it, the countdown + badge show; after it, the Spotify embed shows.
 
 - id: too-tall-to-see-the-moon
   title: Too Tall To See The Moon
   type_label: EP
   featured: true
-  status: upcoming
   release_date: 2026-05-21T12:00:00+01:00
   badge_text: Out May 22nd 2026
   alt: Too Tall To See The Moon EP artwork

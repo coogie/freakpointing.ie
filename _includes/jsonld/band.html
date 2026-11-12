@@ -54,14 +54,14 @@
   {%- endif %}
   {%- assign top_singles = site.data.releases
         | where: "type_label", "Single"
-        | where: "status", "released"
+        | where: "released", true
         | where_exp: "r", "r.hidden != true" -%}
   {%- if top_singles.size > 0 %}
   "track": [
     {%- for r in top_singles -%}
     {%- comment -%}
       Each released single's first (and typically only) track. The track @id
-      pattern matches what _includes/jsonld/releases.html line 51 emits.
+      pattern matches what _includes/jsonld/releases.html emits.
     {%- endcomment -%}
     {%- assign track_name = r.tracks | first -%}
     {%- assign tid = track_name | slugify | prepend: "/#track-" | prepend: site.url %}

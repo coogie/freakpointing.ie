@@ -1,48 +1,5 @@
 {% include jsonld/releases.html %}
 
-<script>
-  /* --- Release countdowns ----------------------------------- */
-  /* Starts a countdown that swaps to an embed when the release date passes. */
-  function startCountdown(releaseDate, id) {
-    const countdownEl = document.getElementById(`${id}-countdown`);
-    const embedEl = document.getElementById(`${id}-embed`);
-    if (!countdownEl || !embedEl) return;
-
-    /* Embed is visible by default. Only swap to countdown if still upcoming. */
-    if (releaseDate - Date.now() <= 0) return;
-
-    countdownEl.style.display = '';
-    embedEl.style.display = 'none';
-
-    const pad = n => String(n).padStart(2, '0');
-    let timer;
-
-    const d = countdownEl.querySelector(`#${id}-days`);
-    const h = countdownEl.querySelector(`#${id}-hours`);
-    const m = countdownEl.querySelector(`#${id}-mins`);
-    const s = countdownEl.querySelector(`#${id}-secs`);
-    function tick() {
-      const diff = releaseDate - Date.now();
-      if (diff <= 0) {
-        clearInterval(timer);
-        countdownEl.style.display = 'none';
-        embedEl.style.display = '';
-        return;
-      }
-      const set = (node, val) => {
-        if (node && node.textContent !== val) node.textContent = val;
-      };
-      set(d, pad(Math.floor(diff / 86400000)));
-      set(h, pad(Math.floor((diff % 86400000) / 3600000)));
-      set(m, pad(Math.floor((diff % 3600000)  / 60000)));
-      set(s, pad(Math.floor((diff % 60000)    / 1000)));
-    }
-
-    tick();
-    timer = setInterval(tick, 1000);
-  }
-</script>
-
 <!-- MUSIC -->
 <section id="music">
   <div class="section-inner">
@@ -52,19 +9,17 @@
     {%- assign singles  = site.data.releases | where: "featured", false | where: "hidden", nil -%}
 
     {%- for r in featured %}
-    {% capture nowunix %}{{'now' | date: '%s'}}{% endcapture %}
-    {% capture releasetime %}{{r.release_date | date: '%s'}}{% endcapture %}
     <!-- {{ r.type_label }} -->
-    <div class="release-featured">
+    <div class="release-featured"{% unless r.released %} data-release-at="{{ r.release_date | date_to_xmlschema }}"{% endunless %}>
       <div class="release-featured-art">
         <img src="{{ r.artwork.src_640 }}"
              srcset="{{ r.artwork.src_640 }} 640w, {{ r.artwork.src_730 }} 730w, {{ r.artwork.src_1200 }} 1200w"
              sizes="{{ r.artwork.sizes }}"
              alt="{{ r.alt }}"
              width="{{ r.artwork.width }}" height="{{ r.artwork.height }}">
-        {% if releasetime > nowunix %}
-        <span class="release-badge">{{ r.badge_text }}</span>
-        {% endif %}
+        {%- unless r.released %}
+        <span class="release-badge" data-release-pending>{{ r.badge_text }}</span>
+        {%- endunless %}
       </div>
       <div class="release-featured-info">
         <p class="release-type">{{ r.type_label }}</p>
@@ -87,7 +42,7 @@
     <div class="singles-grid">
       {%- for r in singles %}
 
-      <div class="single-card">
+      <div class="single-card"{% unless r.released %} data-release-at="{{ r.release_date | date_to_xmlschema }}"{% endunless %}>
         <div class="single-art-wrap">
           <img src="{{ r.artwork.src_640 }}"
                srcset="{{ r.artwork.src_640 }} 640w, {{ r.artwork.src_1200 }} 1200w"
