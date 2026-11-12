@@ -1,36 +1,37 @@
+{%- comment -%}
+  Countdown + Spotify embed for one release. Visibility is driven by the
+  Release lifecycle (see _plugins/release_phase.rb and script.js): the
+  enclosing element carries `data-release-at` while the release is pending,
+  [data-release-pending] shows until release and [data-release-out] after.
+{%- endcomment -%}
 <div class="release-embed">
-  {% capture nowunix %}{{'now' | date: '%s'}}{% endcapture %}
-  {% capture releasetime %}{{include.r.release_date | date: '%s'}}{% endcapture %}
-  {% if releasetime > nowunix %}
-  <div id="{{ include.r.id }}-countdown" style="display:none">
+  {%- unless include.r.released %}
+  <div data-release-pending data-release-countdown>
     <p class="ep-countdown-label">Out in</p>
     <div class="countdown-units">
       <div class="countdown-unit">
-        <span class="countdown-num" id="{{ include.r.id }}-days">00</span>
+        <span class="countdown-num" data-countdown-unit="days">00</span>
         <span class="countdown-label">Days</span>
       </div>
       <span class="countdown-sep" aria-hidden="true">:</span>
       <div class="countdown-unit">
-        <span class="countdown-num" id="{{ include.r.id }}-hours">00</span>
+        <span class="countdown-num" data-countdown-unit="hours">00</span>
         <span class="countdown-label">Hours</span>
       </div>
       <span class="countdown-sep" aria-hidden="true">:</span>
       <div class="countdown-unit">
-        <span class="countdown-num" id="{{ include.r.id }}-mins">00</span>
+        <span class="countdown-num" data-countdown-unit="mins">00</span>
         <span class="countdown-label">Mins</span>
       </div>
       <span class="countdown-sep" aria-hidden="true">:</span>
       <div class="countdown-unit">
-        <span class="countdown-num" id="{{ include.r.id }}-secs">00</span>
+        <span class="countdown-num" data-countdown-unit="secs">00</span>
         <span class="countdown-label">Secs</span>
       </div>
     </div>
   </div>
-  {%- endif %}
-  <div id="{{ include.r.id }}-embed" class="ep-embed-reveal">
+  {%- endunless %}
+  <div class="ep-embed-reveal" data-release-out>
     <iframe title="{{ include.r.iframe_title }}" style="border-radius:0" src="https://open.spotify.com/embed/album/{{ include.r.spotify_embed_id }}?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   </div>
-  <script>
-    startCountdown(new Date('{{ include.r.release_date | date_to_xmlschema }}'), "{{ include.r.id }}");
-  </script>
 </div>

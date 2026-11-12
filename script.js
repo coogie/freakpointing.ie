@@ -421,6 +421,45 @@
     observer.observe(gigsSection);
   }
 
+  /* --- Release countdowns ----------------------------------- */
+  // Runtime half of the Release lifecycle (build half: _plugins/release_phase.rb).
+  // A pending release's markup carries data-release-at (ISO 8601). Critical CSS
+  // shows [data-release-pending] and hides [data-release-out] until the root
+  // gets data-released; this sets it when the moment passes and ticks the
+  // [data-countdown-unit] spans meanwhile.
+  // ms: unit length; wrap: rolls over into the next unit up (days never wrap).
+  const COUNTDOWN_UNITS = {
+    days:  { ms: 86400000, wrap: Infinity },
+    hours: { ms: 3600000,  wrap: 24 },
+    mins:  { ms: 60000,    wrap: 60 },
+    secs:  { ms: 1000,     wrap: 60 },
+  };
+  const pad2 = n => String(n).padStart(2, '0');
+
+  document.querySelectorAll('[data-release-at]').forEach(root => {
+    const releaseAt = Date.parse(root.dataset.releaseAt);
+    if (Number.isNaN(releaseAt)) return;
+    const units = root.querySelectorAll('[data-countdown-unit]');
+    let timer = null;
+
+    function tick() {
+      const diff = releaseAt - Date.now();
+      if (diff <= 0) {
+        clearInterval(timer);
+        root.dataset.released = '';
+        return;
+      }
+      units.forEach(el => {
+        const { ms, wrap } = COUNTDOWN_UNITS[el.dataset.countdownUnit];
+        const val = pad2(Math.floor(diff / ms) % wrap);
+        if (el.textContent !== val) el.textContent = val;
+      });
+    }
+
+    tick();
+    if (!('released' in root.dataset)) timer = setInterval(tick, 1000);
+  });
+
   /* --- Consolidated keyboard handler ------------------------ */
   document.addEventListener('keydown', e => {
     if (lightbox && lightbox.classList.contains('open')) {
